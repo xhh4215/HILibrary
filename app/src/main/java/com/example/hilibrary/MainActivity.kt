@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import com.example.hilibrary.activity.HiLogActivity
+import com.example.hilibrary.activity.HiLogDemoActivity
 
 class MainActivity : AppCompatActivity() , View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
     override fun onClick(v: View?) {
         when(v!!.id){
             R.id.tv_hilog->{
-                startActivity(Intent(this,HiLogActivity::class.java))
+                startActivity(Intent(this,HiLogDemoActivity::class.java))
             }
         }
     }

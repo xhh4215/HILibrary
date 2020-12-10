@@ -1,4 +1,6 @@
-package com.example.hilibrary.log;
+package com.example.hilibrary.log.printer;
+
+import com.example.hilibrary.log.HiLogConfig;
 
 import org.jetbrains.annotations.NotNull;
 

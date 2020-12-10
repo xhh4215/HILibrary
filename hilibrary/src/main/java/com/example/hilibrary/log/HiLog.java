@@ -2,7 +2,13 @@ package com.example.hilibrary.log;
 
 import android.util.Log;
 
+import com.example.hilibrary.log.printer.HiLogPrinter;
+import com.example.hilibrary.log.utils.HiStackTraceUtil;
+
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.List;
 
 /***
  * 日志打印框架的核心
@@ -11,6 +17,13 @@ import org.jetbrains.annotations.NotNull;
  *   3 模拟控制台
  */
 public class HiLog {
+    private static final String HI_LOG_PACKAGE;
+
+    static {
+        String className = HiLog.class.getName();
+        HI_LOG_PACKAGE = className.substring(0, className.lastIndexOf('.') + 1);
+    }
+
     public static void v(Object... contents) {
         log(HiLogType.V, contents);
     }
@@ -77,13 +90,31 @@ public class HiLog {
             return;
         }
         StringBuilder builder = new StringBuilder();
-        String body = parseBody(contents);
+        if (config.includeThread()) {
+            String threadInfo = HiLogConfig.HI_THREAD_FORMATTER.format(Thread.currentThread());
+            builder.append(threadInfo).append("\n");
+        }
+        if (config.stackTraceDepth() > 0) {
+            String stackTrace = HiLogConfig.HI_STACK_TRACE_FORMATTER.format(HiStackTraceUtil.getCroppedRealStackTrack(new Throwable().getStackTrace(),HI_LOG_PACKAGE,config.stackTraceDepth()));
+            builder.append(stackTrace).append("\n");
+
+        }
+        String body = parseBody(contents, config);
         builder.append(body);
-        Log.println(type, tag, body);
+        List<HiLogPrinter> printers = config.printers() != null ? Arrays.asList(config.printers()) : HiLogManager.getInstance().getPrinters();
+        if (printers == null) {
+            return;
+        }
+        //打印Log
+        for (HiLogPrinter printer : printers) {
+            printer.print(config, type, tag, builder.toString());
+        }
     }
 
-    private static String parseBody(@NotNull Object[] contents) {
-
+    private static String parseBody(@NotNull Object[] contents, @NotNull HiLogConfig config) {
+        if (config.injectJsonParser() != null) {
+            return config.injectJsonParser().toJson(contents);
+        }
         StringBuilder sb = new StringBuilder();
         for (Object o : contents) {
             sb.append(o.toString()).append(";");
