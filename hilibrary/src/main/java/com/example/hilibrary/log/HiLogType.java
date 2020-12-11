@@ -14,9 +14,7 @@ public  class HiLogType {
     @IntDef({V, D, I, W, E, A})
     @Retention(RetentionPolicy.SOURCE)
     public @interface TYPE {
-
     }
-
     public static final int V = Log.VERBOSE;
     public static final int D = Log.DEBUG;
     public static final int I = Log.INFO;

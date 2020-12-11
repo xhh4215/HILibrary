@@ -126,18 +126,28 @@ public class HiLog {
         if (!config.enable()) {
             return;
         }
+
         StringBuilder builder = new StringBuilder();
+        //判断是包含线程信息
         if (config.includeThread()) {
+            //格式化线程信息
             String threadInfo = HiLogConfig.HI_THREAD_FORMATTER.format(Thread.currentThread());
+            //拼接格式化的信息
             builder.append(threadInfo).append("\n");
         }
+        //判断是否包含堆栈信息
         if (config.stackTraceDepth() > 0) {
+            //格式化堆栈信息
             String stackTrace = HiLogConfig.HI_STACK_TRACE_FORMATTER.format(HiStackTraceUtil.getCroppedRealStackTrack(new Throwable().getStackTrace(), HI_LOG_PACKAGE, config.stackTraceDepth()));
+            //拼接格式化信息
             builder.append(stackTrace).append("\n");
 
         }
+        //解析日志数据对象
         String body = parseBody(contents, config);
+        //拼接log日志信息
         builder.append(body);
+        //
         List<HiLogPrinter> printers = config.printers() != null ? Arrays.asList(config.printers()) : HiLogManager.getInstance().getPrinters();
         if (printers == null) {
             return;
@@ -148,6 +158,12 @@ public class HiLog {
         }
     }
 
+    /****
+     * 解析Log日志的数据对象
+     * @param contents   等待解析的日志对象
+     * @param config  日志解析配置对象
+     * @return
+     */
     private static String parseBody(@NotNull Object[] contents, @NotNull HiLogConfig config) {
         if (config.injectJsonParser() != null) {
             return config.injectJsonParser().toJson(contents);

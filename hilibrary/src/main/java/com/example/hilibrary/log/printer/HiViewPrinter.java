@@ -79,7 +79,7 @@ public class HiViewPrinter implements HiLogPrinter {
             holder.tagView.setTextColor(color);
             holder.messageView.setTextColor(color);
 
-            holder.tagView.setText(logItem.getFlattened());
+            holder.tagView.setText(logItem.flattenedLog());
             holder.messageView.setText(logItem.log);
         }
 

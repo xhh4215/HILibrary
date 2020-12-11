@@ -7,12 +7,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
+ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hilibrary.log.utils.HiDisplayUtil;
-
-import org.w3c.dom.Text;
 
 public class HiViewPrinterProvider {
     private FrameLayout rootView;
