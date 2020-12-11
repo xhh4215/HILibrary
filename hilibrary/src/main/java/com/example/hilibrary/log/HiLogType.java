@@ -10,7 +10,7 @@ import java.lang.annotation.RetentionPolicy;
 /***
  * 打印的类型
  */
-public class HiLogType {
+public  class HiLogType {
     @IntDef({V, D, I, W, E, A})
     @Retention(RetentionPolicy.SOURCE)
     public @interface TYPE {

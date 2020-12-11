@@ -8,6 +8,7 @@ import com.example.hilibrary.log.printer.HiLogPrinter;
  * 日志打印的配置类
  */
 public abstract class HiLogConfig {
+    // 日志每行的最大长度
     public static int MAX_LEN = 512;
     //懒汉模式的单利创建 日志格式化器
     static HiStackTraceFormatter HI_STACK_TRACE_FORMATTER = new HiStackTraceFormatter();
@@ -21,12 +22,16 @@ public abstract class HiLogConfig {
         return "HiLog";
     }
 
+    /***
+     * 一个解析object的解析器 对象转化为json
+     * @return
+     */
     public JsonParser injectJsonParser() {
         return null;
     }
 
     /***
-     *
+     * 是否开启打印
      * @return
      */
     public boolean enable() {
@@ -62,7 +67,5 @@ public abstract class HiLogConfig {
      */
     public interface JsonParser {
         String toJson(Object src);
-
-
     }
 }

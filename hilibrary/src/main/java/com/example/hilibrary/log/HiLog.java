@@ -17,26 +17,46 @@ import java.util.List;
  *   3 模拟控制台
  */
 public class HiLog {
+    //忽律的日志信息的包名
     private static final String HI_LOG_PACKAGE;
 
+    //获取当前的Library的包名
     static {
         String className = HiLog.class.getName();
         HI_LOG_PACKAGE = className.substring(0, className.lastIndexOf('.') + 1);
     }
 
+    /***
+     * 打印信息
+     * @param contents 打印的内容
+     */
     public static void v(Object... contents) {
         log(HiLogType.V, contents);
     }
 
+    /***
+     * 打印信息
+     * @param tag 打印的标识
+     * @param contents 打印的内容
+     */
     public static void vt(String tag, Object... contents) {
         log(HiLogType.V, tag, contents);
     }
 
-
+    /**
+     * 打印信息
+     *
+     * @param contents 打印的内容
+     */
     public static void d(Object... contents) {
         log(HiLogType.D, contents);
     }
 
+    /***
+     * 打印信息
+     * @param tag 打印的标识
+     * @param contents 打印的内容
+     */
     public static void dt(String tag, Object... contents) {
         log(HiLogType.D, tag, contents);
     }
@@ -75,16 +95,33 @@ public class HiLog {
         log(HiLogType.A, tag, contents);
     }
 
-
+    /****
+     * 日志打印方法
+     * @param type  日志打印的类型
+     * @param contents  打印的日志的内容
+     */
     public static void log(@HiLogType.TYPE int type, Object... contents) {
         log(type, HiLogManager.getInstance().getConfig().getGlobalTag(), contents);
     }
 
+    /***
+     * 日志打印方法
+     * @param type 日志打印的类型
+     * @param tag  日志打印的标识
+     * @param contents  打印的日志的内容
+     */
     public static void log(@HiLogType.TYPE int type, @NotNull String tag, Object... contents) {
         log(HiLogManager.getInstance().getConfig(), type, tag, contents);
 
     }
 
+    /***
+     * 日志打印方法
+     * @param config 日志打印的配置信息
+     * @param type   日志打印的类型
+     * @param tag    日志打印的标识
+     * @param contents   打印的日志的内容
+     */
     public static void log(@NotNull HiLogConfig config, @HiLogType.TYPE int type, @NotNull String tag, Object... contents) {
         if (!config.enable()) {
             return;
@@ -95,7 +132,7 @@ public class HiLog {
             builder.append(threadInfo).append("\n");
         }
         if (config.stackTraceDepth() > 0) {
-            String stackTrace = HiLogConfig.HI_STACK_TRACE_FORMATTER.format(HiStackTraceUtil.getCroppedRealStackTrack(new Throwable().getStackTrace(),HI_LOG_PACKAGE,config.stackTraceDepth()));
+            String stackTrace = HiLogConfig.HI_STACK_TRACE_FORMATTER.format(HiStackTraceUtil.getCroppedRealStackTrack(new Throwable().getStackTrace(), HI_LOG_PACKAGE, config.stackTraceDepth()));
             builder.append(stackTrace).append("\n");
 
         }
