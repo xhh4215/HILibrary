@@ -1,10 +1,12 @@
 package com.example.hiui.tab
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hi_ui.ui.tab.bottom.HiTabBottomInfo
 import com.example.hi_ui.ui.tab.bottom.HiTabBottomLayout
+import com.example.hilibrary.log.utils.HiDisplayUtil
 import com.example.hiui.R
 
 class HiTabBottomActivity : AppCompatActivity() {
@@ -35,13 +37,18 @@ class HiTabBottomActivity : AppCompatActivity() {
             "#ff656667",
             "#ffd44949"
         )
-        val categoryInfo = HiTabBottomInfo(
-            "分类", "fonts/iconfont.ttf"
-            , getString(R.string.if_category),
-            null,
-            "#ff656667",
-            "#ffd44949"
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.fire, null)
+        val categoryInfo = HiTabBottomInfo<String>(
+            "分类",
+            bitmap, bitmap
         )
+//        val categoryInfo = HiTabBottomInfo(
+//            "分类", "fonts/iconfont.ttf"
+//            , getString(R.string.if_category),
+//            null,
+//            "#ff656667",
+//            "#ffd44949"
+//        )
         val chatInfo = HiTabBottomInfo(
             "推荐", "fonts/iconfont.ttf"
             , getString(R.string.if_chat),
@@ -57,8 +64,8 @@ class HiTabBottomActivity : AppCompatActivity() {
             "#ffd44949"
         )
         bottomInfoList.add(homeInfo)
-        bottomInfoList.add(categoryInfo)
         bottomInfoList.add(profileInfo)
+        bottomInfoList.add(categoryInfo)
         bottomInfoList.add(chatInfo)
         bottomInfoList.add(recommendInfo)
         hiTabBottomLayout.inflateInfo(bottomInfoList)
@@ -66,6 +73,9 @@ class HiTabBottomActivity : AppCompatActivity() {
             Toast.makeText(this@HiTabBottomActivity, nextInfo.name, Toast.LENGTH_SHORT).show()
         }
         hiTabBottomLayout.defaultSelected(homeInfo)
-
+        val tabBottom = hiTabBottomLayout.findTab(bottomInfoList[2])
+        tabBottom?.apply {
+            resetHeight(HiDisplayUtil.dp2px(66f, resources))
+        }
     }
 }
