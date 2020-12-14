@@ -1,9 +1,10 @@
+include ':common'
 include ':app'
 rootProject.name = "ASProj"
 
-include ':hi-library'
-project(':hi-library').projectDir="../HiLibrary/hilibrary" as File
+include ':hilibrary'
+project(':hilibrary').projectDir="../hilibrary/hi-library" as File
 
 
-include 'hi-ui'
-project(':hi-ui').projectDir = "../HiUI/hi-ui" as File
+include 'hiui'
+project(':hiui').projectDir = "../hiui/hi-ui" as File

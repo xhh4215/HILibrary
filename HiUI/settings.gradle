@@ -1,5 +1,5 @@
-include ':hiui'
+include ':hi-ui'
 include ':app'
-rootProject.name = "HiUI"
+rootProject.name = "hiui"
 include ':hilibrary'
-project(':hilibrary').projectDir="../HiLibrary/hilibrary" as File
+project(':hilibrary').projectDir="../hilibrary/hi-library" as File

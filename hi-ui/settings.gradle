@@ -1,0 +1,5 @@
+include ':hiui'
+include ':app'
+rootProject.name = "HiUI"
+include ':HiLibrary'
+project(':HiLibrary').projectDir="../HiLibrary/hilibrary" as File
