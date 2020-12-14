@@ -25,9 +25,11 @@ import java.util.Iterator;
 import java.util.List;
 
 public class HiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTabBottom, HiTabBottomInfo<?>> {
+    //设置所有的tab的监听事件
     private List<OnTabSelectedListener<HiTabBottomInfo<?>>> tabSelectedListeners = new ArrayList<>();
     //当前被选中的tabBottom的信息
     private HiTabBottomInfo<?> selectedInfo;
+    //底部的bottom的透明度
     private float bottomAlpha = 1f;
     //tabBottom 高度
     private float tabBottomHeight = 50;
@@ -35,6 +37,7 @@ public class HiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
     private float bottomLineHeight = 0.5f;
     //tabBottom的线条的颜色
     private String bottomLineColor = "#dfe0e1";
+    //底部layout对应的数据集合
     private List<HiTabBottomInfo<?>> infoList;
 
     public HiTabBottomLayout(@NonNull Context context) {

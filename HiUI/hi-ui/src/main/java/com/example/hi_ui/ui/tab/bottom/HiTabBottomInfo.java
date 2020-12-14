@@ -4,7 +4,14 @@ import android.graphics.Bitmap;
 
 import androidx.fragment.app.Fragment;
 
+/***
+ * @auhtor 栾桂明
+ * @date 2020 年12月 14日
+ * @desc 设置tab的具体数据信息的对象
+ * @param <Color>  内部使用的颜色信息
+ */
 public class HiTabBottomInfo<Color> {
+    // tab的类型
     public enum TabType {
         BITMAP, ICON
     }

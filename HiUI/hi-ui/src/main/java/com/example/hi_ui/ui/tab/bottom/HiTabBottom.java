@@ -19,7 +19,13 @@ import androidx.annotation.Nullable;
 import com.example.hi_ui.R;
 import com.example.hi_ui.ui.tab.common.IHiTab;
 
+/***
+ * @zuthor 栾桂明
+ * @desc tablayout内部存放的一个个的tab
+ * @date 2020年12月14日
+ */
 public class HiTabBottom extends RelativeLayout implements IHiTab<HiTabBottomInfo<?>> {
+    //每个tab对应的具体的信息
     private HiTabBottomInfo<?> tabInfo;
     private ImageView tabImageView;
     private TextView tabIconView;
