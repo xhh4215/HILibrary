@@ -2,15 +2,11 @@ package com.example.asproj.logic;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
-
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentManager;
-
 import com.example.asproj.R;
 import com.example.asproj.fragment.CategoryFragment;
 import com.example.asproj.fragment.FavoriteFragment;
@@ -21,11 +17,8 @@ import com.example.common.tab.HiFragmentTabView;
 import com.example.common.tab.HiTabViewAdapter;
 import com.example.hi_ui.ui.tab.bottom.HiTabBottomInfo;
 import com.example.hi_ui.ui.tab.bottom.HiTabBottomLayout;
-import com.example.hi_ui.ui.tab.common.IHiTabLayout;
-
 import java.util.ArrayList;
 import java.util.List;
-
 public class MainActivityLogic {
     private HiFragmentTabView fragmentTabView;
     private HiTabBottomLayout hiTabBottomLayout;
