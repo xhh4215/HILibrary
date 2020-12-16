@@ -1,4 +1,4 @@
-package com.example.hi_ui.ui.banner;
+package com.example.hi_ui.ui.banner.core;
 
 
 import android.app.Activity;
@@ -6,12 +6,12 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
+import java.io.File;
 import java.lang.reflect.Field;
 
 /***
@@ -99,6 +99,18 @@ public class HiViewPager extends ViewPager {
         isLayout = true;
     }
 
+    public void setScrollDuration(int duration) {
+        try {
+            Field scrollerFiled = ViewPager.class.getDeclaredField("mScroller");
+            scrollerFiled.setAccessible(true);
+            scrollerFiled.set(this,new HiBannerScroller(getContext(),duration));
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setIntervalTime(int mIntervalTime) {
         this.mIntervalTime = mIntervalTime;
     }
@@ -117,14 +129,14 @@ public class HiViewPager extends ViewPager {
     private int next() {
         int nextPosition = -1;
         if (getAdapter() == null || getAdapter().getCount() <= 1) {
-            // stop()
+            stop();
             return nextPosition;
         }
         nextPosition = getCurrentItem() + 1;
         //下一个索引大于adapter的view的最大数量的时候重新开始
         if (nextPosition >= getAdapter().getCount()) {
             // 获取第一个item的索引
-//            nextPosition = getAdapter().get
+            nextPosition = ((HiBannerAdapter) getAdapter()).getFirstItem();
         }
         setCurrentItem(nextPosition, true);
         return nextPosition;

@@ -18,8 +18,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         val toptab = findViewById<Button>(R.id.topTab)
         toptab.setOnClickListener(this)
-        val  refresh = findViewById<Button>(R.id.refresh)
+        val refresh = findViewById<Button>(R.id.refresh)
         refresh.setOnClickListener(this)
+        val banner = findViewById<Button>(R.id.banner)
+        banner.setOnClickListener(this)
 
 
     }
@@ -31,6 +33,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.topTab -> {
                 startActivity(Intent(this@MainActivity, TabTopDemoActivity::class.java))
+            }
+            R.id.banner->{
+                startActivity(Intent(this@MainActivity, IndicatorDemoActivity::class.java))
+
             }
         }
     }
