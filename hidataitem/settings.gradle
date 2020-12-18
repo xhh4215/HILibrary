@@ -1,0 +1,3 @@
+include ':hi-dataitem'
+include ':app'
+rootProject.name = "hidataitem"

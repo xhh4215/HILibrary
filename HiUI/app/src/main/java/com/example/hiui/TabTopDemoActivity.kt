@@ -3,8 +3,10 @@ package com.example.hiui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hi_ui.ui.tab.top.HiTabTopInfo
 import com.example.hi_ui.ui.tab.top.HiTabTopLayout
+import java.util.ArrayList
 
 class TabTopDemoActivity : AppCompatActivity() {
     val array = arrayOf(

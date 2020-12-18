@@ -10,4 +10,7 @@
     <!--    TabBottom-->
     <color name="tabBottomDefaultColor">#ff656667</color>
     <color name="tabBottomTintColor">#ffd44949</color>
+<!--    TopTab-->
+    <color name="tabTopDefaultColor">#ff656667</color>
+    <color name="tabTopTintColor">#ffd44949</color>
 </resources>
