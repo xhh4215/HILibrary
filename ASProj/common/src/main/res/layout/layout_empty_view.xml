@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/empty_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_40" />
+
+    <TextView
+        android:id="@+id/empty_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:gravity="center"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_16"
+        android:visibility="visible"
+        tools:text="虽然啥也没有，要不然下拉刷新试试" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/empty_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="刷新"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16"
+        android:visibility="gone"
+        app:backgroundTint="@color/color_cc0000"
+        app:cornerRadius="@dimen/dp_8"
+        tools:visibility="visible" />
+
+</LinearLayout>
