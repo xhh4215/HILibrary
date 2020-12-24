@@ -6,4 +6,7 @@
     <string name="if_profile">&#xe634;</string>
     <string name="if_category">&#xf00a6;</string>
     <string name="if_favorite">&#xe639;</string>
+    <string name="if_unexpected">&#xe692;</string>
+    <string name="degrade_title">错误提示</string>
+    <string name="degrade_tip">页面跑远了，开发小哥哥正在修复...</string>
 </resources>

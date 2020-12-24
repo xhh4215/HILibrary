@@ -1,4 +1,4 @@
-package com.example.common.uicomponent;
+package com.example.common.ui.component;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,16 +22,9 @@ public abstract class HiBaseFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         layoutView = inflater.inflate(getLayoutId(), container, false);
-        initLayout();
-        initData();
+
         return layoutView;
     }
 
-    public void initLayout() {
 
-    }
-
-    public void initData() {
-
-    }
 }

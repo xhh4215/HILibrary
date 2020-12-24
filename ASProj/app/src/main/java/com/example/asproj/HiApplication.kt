@@ -12,6 +12,12 @@ import com.example.common.manager.ActivityManager
 class HiApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-       
+        ActivityManager.instance.init(this)
+        // 阿里巴巴的路由导航框架的初始化
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog()
+            ARouter.openDebug()
+        }
+        ARouter.init(this)
     }
 }

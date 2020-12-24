@@ -7,10 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <!--    TabBottom-->
+     <!--    TabBottom-->
     <color name="tabBottomDefaultColor">#ff656667</color>
-    <color name="tabBottomTintColor">#ffd44949</color>
+    <color name="tabBottomTintColor">#FF3700B3</color>
 <!--    TopTab-->
     <color name="tabTopDefaultColor">#ff656667</color>
-    <color name="tabTopTintColor">#ffd44949</color>
+    <color name="tabTopTintColor">#FF3700B3</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_cc0000">#cc0000</color>
 </resources>

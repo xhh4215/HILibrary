@@ -1,7 +1,7 @@
 package com.example.hi_library.log.printer;
 
 
-import com.example.hi_library.log.HiLogConfig;
+import com.example.hi_library.log.common.HiLogConfig;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.hi_library.R;
-import com.example.hi_library.log.HiLogConfig;
-import com.example.hi_library.log.HiLogMo;
-import com.example.hi_library.log.HiLogType;
+import com.example.hi_library.log.common.HiLogConfig;
+import com.example.hi_library.log.common.HiLogMo;
+import com.example.hi_library.log.common.HiLogType;
 
 import org.jetbrains.annotations.NotNull;
 

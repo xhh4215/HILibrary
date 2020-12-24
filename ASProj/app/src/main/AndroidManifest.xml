@@ -10,10 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ASProj">
-        <activity android:name=".ViewPagerTestActivity">
-
-        </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".rote.DegradeGlobalActivity" />
+          <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

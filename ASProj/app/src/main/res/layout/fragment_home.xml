@@ -4,9 +4,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-  <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/home_recyclerView"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="个人中心" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="会员权益" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="账户充值" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/global"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="全局降级策略" />
+    </LinearLayout>
+
 
 </FrameLayout>

@@ -3,7 +3,7 @@
     package="com.example.common">
 
     <application>
-        <activity android:name=".uicomponent.HiBaseActivity"></activity>
+        <activity android:name=".ui.component.HiBaseActivity"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,7 @@
 package com.example.asproj.fragment;
 
 import com.example.asproj.R;
-import com.example.common.uicomponent.HiBaseFragment;
+import com.example.common.ui.component.HiBaseFragment;
 
 public class CategoryFragment extends HiBaseFragment {
     @Override

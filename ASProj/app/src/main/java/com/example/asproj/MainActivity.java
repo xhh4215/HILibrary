@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import com.example.asproj.logic.MainActivityLogic;
 import com.example.asproj.logic.MainActivityLogic.ActivityProvider;
 import com.example.common.manager.ActivityManager;
-import com.example.common.uicomponent.HiBaseActivity;
+import com.example.common.ui.component.HiBaseActivity;
 
 public class MainActivity extends HiBaseActivity implements ActivityProvider {
     private MainActivityLogic activityLogic;
@@ -35,5 +35,7 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
         super.onSaveInstanceState(outState);
         activityLogic.onSaveInstanceState(outState);
     }
+
+
 
 }

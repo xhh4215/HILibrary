@@ -1,4 +1,4 @@
-package com.example.common.uicomponent;
+package com.example.common.ui.component;
 
 public interface HiBaseActionInterface {
 }
