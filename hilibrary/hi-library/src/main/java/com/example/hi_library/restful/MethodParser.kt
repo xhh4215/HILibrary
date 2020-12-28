@@ -12,13 +12,13 @@ class MethodParser(
     method: Method,
     args: Array<Any>
 ) {
-    private lateinit var domainUrl: String
+    private  var domainUrl: String?=null
     private var fromPost = true
     private var httpMethod: Int = 0
     private lateinit var relativeUrl: String
     private lateinit var returnType: Type
     private var headers: MutableMap<String, String> = mutableMapOf()
-    private var parameters: MutableMap<String, Any> = mutableMapOf()
+    private var parameters: MutableMap<String, String> = mutableMapOf()
 
     init {
         //解析方法的注解  such get  headers   post  baseurl
@@ -81,7 +81,7 @@ class MethodParser(
                 is Field -> {
                     val key = annotation.value
                     val value = args[index]
-                    parameters[key] = value
+                    parameters[key] = value.toString()
                 }
                 is Path -> {
                     //要不替换的相对路径中的String
@@ -166,10 +166,11 @@ class MethodParser(
                     throw IllegalStateException(String.format("cannot handler method annotation${annotation.javaClass.toString()}"))
                 }
             }
-            require(!(httpMethod != HiRequest.METHOD.GET) && !(httpMethod != HiRequest.METHOD.POST)) {
-                String.format("method  %s must has one of GET ,POST${method.name}")
 
-            }
+
+        }
+        require((httpMethod == HiRequest.METHOD.GET) ||(httpMethod == HiRequest.METHOD.POST)) {
+            String.format("method  %s must has one of GET ,POST${method.name}")
 
         }
         if (domainUrl == null) {
@@ -185,6 +186,7 @@ class MethodParser(
         request.parameters = parameters
         request.returnType = returnType
         request.relativeUrl = relativeUrl
+        request.formPost = fromPost
         return request
     }
 
