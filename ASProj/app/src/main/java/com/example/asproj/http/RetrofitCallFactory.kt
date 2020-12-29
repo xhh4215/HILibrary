@@ -66,7 +66,7 @@ class RetrofitCallFactory(val baseUrl: String) : HiCall.Factory {
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) {
-                    rawData = body.toString()
+                    rawData = body.string()
                 }
             } else {
                 val body = response.errorBody()

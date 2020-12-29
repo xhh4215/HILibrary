@@ -1,13 +1,15 @@
 package com.example.asproj;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.asproj.biz.LoginActivity;
 import com.example.asproj.http.ApiFactory;
-import com.example.asproj.http.TestApi;
+
 import com.example.asproj.logic.MainActivityLogic;
 import com.example.asproj.logic.MainActivityLogic.ActivityProvider;
 import com.example.common.manager.ActivityManager;
@@ -27,17 +29,7 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
         setContentView(R.layout.activity_main);
         ActivityManager.Companion.getInstance().addFrontBackCallback(front -> Toast.makeText(MainActivity.this, "前后天切换", Toast.LENGTH_SHORT).show());
         activityLogic = new MainActivityLogic(this, savedInstanceState);
-        ApiFactory.INSTANCE.create(TestApi.class).listCities("immoc").enqueue(new HiCallBack<JsonObject>() {
-            @Override
-            public void onSuccess(@NotNull HiResponse<JsonObject> response) {
-
-            }
-
-            @Override
-            public void onFailed(@NotNull Throwable throwable) {
-
-            }
-        });
+         startActivity(new Intent(this, LoginActivity.class));
      }
 
     /***

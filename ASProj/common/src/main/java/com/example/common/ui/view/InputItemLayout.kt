@@ -7,20 +7,25 @@ import android.graphics.Paint
 import android.graphics.Typeface
 import android.text.InputType
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
-import android.view.View
-import android.view.ViewGroup
+import android.view.Gravity.CENTER
+import android.view.Gravity.LEFT
+
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.common.R
 
 open class InputItemLayout : LinearLayout {
+    lateinit var editText: EditText
+    private lateinit var titleTextView: TextView
     private var bottomLine: Line
     private var topLine: Line
     private var topPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var bottomPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attributeSet: AttributeSet?) : this(context, attributeSet, 0)
@@ -107,22 +112,23 @@ open class InputItemLayout : LinearLayout {
             R.styleable.inputTextAppearance_textSize,
             applyUnit(TypedValue.COMPLEX_UNIT_SP, 14f)
         )
-        val editText = EditText(context)
+        editText = EditText(context)
         val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
         params.weight = 1f
-        editText.layoutParams = params
+         editText.layoutParams = params
         editText.hint = hint
         editText.setHintTextColor(hintColor)
         editText.setTextColor(inputColor)
         editText.setBackgroundColor(Color.TRANSPARENT)
         editText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize.toFloat())
-        editText.gravity = Gravity.LEFT and (Gravity.CENTER)
+        editText.gravity = LEFT or (CENTER)
         if (inputType == 0) {
-            editText.inputType = InputType.TYPE_TEXT_VARIATION_NORMAL
+            editText.inputType = InputType.TYPE_CLASS_TEXT
         } else if (inputType == 1) {
-            editText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+            editText.inputType =
+                InputType.TYPE_TEXT_VARIATION_PASSWORD or (InputType.TYPE_CLASS_TEXT)
         } else if (inputType == 2) {
-            editText.inputType = InputType.TYPE_NUMBER_VARIATION_NORMAL
+            editText.inputType = InputType.TYPE_CLASS_NUMBER
         }
         addView(editText)
         array.recycle()
@@ -135,28 +141,27 @@ open class InputItemLayout : LinearLayout {
             resources.getColor(R.color.tabBottomDefaultColor)
         )
         val titleSize = array.getDimensionPixelSize(
-            R.styleable.inputTextAppearance_textSize,
-            applyUnit(TypedValue.COMPLEX_UNIT_SP, 15f)
+            R.styleable.titleTextAppearance_titleSize,
+            applyUnit(TypedValue.COMPLEX_UNIT_SP, 14f)
         )
         val minWidth = array.getDimensionPixelOffset(R.styleable.titleTextAppearance_minWidth, 0)
-
-        val titleView = TextView(context)
-        titleView.textSize = titleSize.toFloat()
-        titleView.setTextColor(titleColor)
-        titleView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
-        titleView.minWidth = minWidth
-        titleView.gravity = Gravity.LEFT and (Gravity.CENTER)
-        titleView.text = title
-        addView(titleView)
+        titleTextView = TextView(context)
+        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize.toFloat())
+        titleTextView.setTextColor(titleColor)
+        titleTextView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
+        titleTextView.minWidth = minWidth
+        titleTextView.gravity = LEFT or CENTER
+        titleTextView.text = title
+        addView(titleTextView)
 
         array.recycle()
     }
 
 
-    override fun onDraw(canvas: Canvas) {
+    override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         if (topLine.enable) {
-            canvas.drawLine(
+            canvas!!.drawLine(
                 topLine.leftMargin.toFloat(),
                 0f,
                 topLine.rightMargin.toFloat(),
@@ -165,11 +170,14 @@ open class InputItemLayout : LinearLayout {
             )
         }
         if (bottomLine.enable) {
-            canvas.drawLine(
+            Log.e("leftMargin",""+bottomLine.leftMargin.toFloat())
+            Log.e("rightMargin",""+bottomLine.rightMargin.toFloat())
+            Log.e("width",""+width)
+            canvas!!.drawLine(
                 bottomLine.leftMargin.toFloat(),
-                height-bottomLine.height.toFloat(),
-                bottomLine.rightMargin.toFloat(),
-                height-bottomLine.height.toFloat(),
+                height - bottomLine.height.toFloat(),
+               measuredWidth-bottomLine.rightMargin.toFloat(),
+                height - bottomLine.height.toFloat(),
                 bottomPaint
             )
         }
