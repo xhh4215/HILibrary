@@ -24,23 +24,25 @@ class Scheduler(
         override fun execute(): HiResponse<T> {
             dispatchInterceptor(request, null)
             val response = delegate.execute()
-            dispatchInterceptor(request,response)
+            dispatchInterceptor(request, response)
             return response
         }
 
 
         override fun enqueue(callBack: HiCallBack<T>) {
-            dispatchInterceptor(request,null)
-            delegate.enqueue(object :HiCallBack<T>{
+            dispatchInterceptor(request, null)
+            delegate.enqueue(object : HiCallBack<T> {
                 override fun onSuccess(response: HiResponse<T>) {
+                    dispatchInterceptor(request, response)
                     callBack?.onSuccess(response)
-                 }
+                }
 
                 override fun onFailed(throwable: Throwable) {
                     callBack?.onFailed(throwable)
-                 }
+                }
 
             })
+
         }
 
         private fun dispatchInterceptor(request: HiRequest, response: HiResponse<T>?) {
@@ -69,9 +71,9 @@ class Scheduler(
 
             fun dispatch() {
                 val interceptor = interceptors[callIndex]
-               val intercept =  interceptor.intercept(this)
+                val intercept = interceptor.intercept(this)
                 callIndex++
-                if (!intercept&&callIndex<interceptors.size){
+                if (!intercept && callIndex < interceptors.size) {
                     dispatch()
                 }
             }

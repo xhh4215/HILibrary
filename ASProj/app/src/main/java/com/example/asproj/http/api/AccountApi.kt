@@ -1,4 +1,4 @@
-package com.example.asproj.http
+package com.example.asproj.http.api
 
 import com.example.hi_library.restful.annotation.Field
 import com.example.hi_library.restful.annotation.POST

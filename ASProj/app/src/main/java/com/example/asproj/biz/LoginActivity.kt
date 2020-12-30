@@ -10,13 +10,13 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.asproj.R
 import com.example.asproj.databinding.ActivityLoginBinding
-import com.example.asproj.http.AccountApi
-import com.example.asproj.http.ApiFactory
+import com.example.asproj.http.api.AccountApi
+import com.example.asproj.http.api.ApiFactory
 import com.example.common.ui.component.HiBaseActivity
 import com.example.common.utils.SPUtil
 import com.example.hi_library.restful.HiResponse
 import com.example.hi_library.restful.callback.HiCallBack
-import org.w3c.dom.Text
+
 @Route(path = "/account/login")
 class LoginActivity : HiBaseActivity() {
     private lateinit var loginBinding: ActivityLoginBinding

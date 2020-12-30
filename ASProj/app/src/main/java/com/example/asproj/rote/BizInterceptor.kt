@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Interceptor
 import com.alibaba.android.arouter.facade.callback.InterceptorCallback
 import com.alibaba.android.arouter.facade.template.IInterceptor
+import com.alibaba.android.arouter.launcher.ARouter
 import java.lang.RuntimeException
 
 @Interceptor(name = "biz_interceptor", priority = 9)
@@ -25,25 +26,19 @@ class BizInterceptor : IInterceptor {
             (flag and (RouterFlag.FLAG_LOGIN) != 0) -> {
                 //login
                 callback.onInterrupt(RuntimeException("need login"))
-                showToast("请先登录")
+                loginInterceptor()
             }
-            (flag and (RouterFlag.FLAG_AUTHENTICATION) != 0) -> {
-                callback.onInterrupt(RuntimeException("need authentication"))
-                showToast("需要实名认证")
-            }
-            (flag and (RouterFlag.FLAG_VIP) != 0) -> {
-                callback.onInterrupt(RuntimeException("need vip"))
-                showToast("需要会员")
-            }
+
             else -> {
                 callback.onContinue(postcard)
             }
         }
     }
 
-    private fun showToast(message: String) {
+    private fun loginInterceptor() {
         Handler(Looper.getMainLooper()).post {
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "请先登录", Toast.LENGTH_SHORT).show()
+            ARouter.getInstance().build("/account/login").navigation()
         }
     }
 

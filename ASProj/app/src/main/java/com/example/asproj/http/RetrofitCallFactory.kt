@@ -17,7 +17,7 @@ import retrofit2.Retrofit
 import retrofit2.http.*
 import java.lang.IllegalStateException
 
-class RetrofitCallFactory(val baseUrl: String) : HiCall.Factory {
+class RetrofitCallFactory( baseUrl: String) : HiCall.Factory {
     private var apiService: ApiService
     private var hiConvert: HiConvert
 

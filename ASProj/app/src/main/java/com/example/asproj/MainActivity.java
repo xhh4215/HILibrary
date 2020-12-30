@@ -8,17 +8,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.asproj.biz.LoginActivity;
-import com.example.asproj.http.ApiFactory;
 
 import com.example.asproj.logic.MainActivityLogic;
 import com.example.asproj.logic.MainActivityLogic.ActivityProvider;
 import com.example.common.manager.ActivityManager;
 import com.example.common.ui.component.HiBaseActivity;
-import com.example.hi_library.restful.HiResponse;
-import com.example.hi_library.restful.callback.HiCallBack;
-import com.google.gson.JsonObject;
-
-import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends HiBaseActivity implements ActivityProvider {
     private MainActivityLogic activityLogic;
