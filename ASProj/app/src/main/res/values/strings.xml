@@ -55,7 +55,7 @@
     <string name="input_item_login_user_password">密码</string>
     <string name="login_success">登录成功</string>
     <string name="login_fail">登录失败</string>
-     <string name="input_item_title_course_order_id">课程的订单号</string>
+    <string name="input_item_title_course_order_id">课程的订单号</string>
     <string name="input_item_hint_course_order_id">请输入课程订单号后四位</string>
     <string name="input_item_title_mooc_id">慕课网ID</string>
     <string name="input_item_hint_mooc_id">请输入慕课网用户ID</string>
@@ -65,4 +65,14 @@
     <string name="input_item_hint_repassword">请再次输入密码</string>
     <string name="input_item_title_password">密码</string>
     <string name="input_item_title_repassword">确认密码</string>
+    <string name="profile_login_desc_welcome_back">进阶学习中的移动端开发工程师</string>
+    <string name="item_course_text">课程公告</string>
+    <string name="item_collection_text">我的收藏</string>
+    <string name="item_address_text">收货地址</string>
+    <string name="item_history_text">游览历史</string>
+    <string name="profile_not_login">请先登录</string>
+    <string name="profile_login_desc">解锁全部功能，畅想架构师福利</string>
+    <string name="profile_tab_item_collection">\n收藏</string>
+    <string name="profile_tab_item_history">\n历史游览</string>
+    <string name="profile_tab_item_learn">\n学习时长</string>
 </resources>

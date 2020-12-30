@@ -9,10 +9,9 @@ import kotlin.IllegalStateException
 
 class MethodParser(
     val baseUrl: String,
-    method: Method,
-    args: Array<Any>
+    method: Method
 ) {
-    private  var domainUrl: String?=null
+    private var domainUrl: String? = null
     private var fromPost = true
     private var httpMethod: Int = 0
     private lateinit var relativeUrl: String
@@ -23,8 +22,6 @@ class MethodParser(
     init {
         //解析方法的注解  such get  headers   post  baseurl
         parseMethodAnnotations(method)
-        //解析方法参数   path  field
-        parseMethodParameters(method, args)
         //解析方法的返回值
         parseMethodReturnType(method)
     }
@@ -169,7 +166,7 @@ class MethodParser(
 
 
         }
-        require((httpMethod == HiRequest.METHOD.GET) ||(httpMethod == HiRequest.METHOD.POST)) {
+        require((httpMethod == HiRequest.METHOD.GET) || (httpMethod == HiRequest.METHOD.POST)) {
             String.format("method  %s must has one of GET ,POST${method.name}")
 
         }
@@ -178,7 +175,9 @@ class MethodParser(
         }
     }
 
-    fun newRequest(): HiRequest {
+    fun newRequest(method: Method, args: Array<out Any>?): HiRequest {
+        val arguments: Array<Any> = args as Array<Any>? ?: arrayOf()
+        parseMethodParameters(method, arguments)
         var request = HiRequest()
         request.domainUrl = domainUrl
         request.headers = headers
@@ -191,8 +190,8 @@ class MethodParser(
     }
 
     companion object {
-        fun parse(baseUrl: String, method: Method, args: Array<Any>): MethodParser {
-            return MethodParser(baseUrl, method, args)
+        fun parse(baseUrl: String, method: Method): MethodParser {
+            return MethodParser(baseUrl, method)
         }
     }
 }

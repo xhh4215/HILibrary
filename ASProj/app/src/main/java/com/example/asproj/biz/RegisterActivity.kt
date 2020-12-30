@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.asproj.R
 import com.example.asproj.databinding.ActivityRegisterBinding
-import com.example.asproj.http.api.AccountApi
+import com.example.asproj.http.api.accountapi.AccountApi
 import com.example.asproj.http.api.ApiFactory
 import com.example.common.ui.component.HiBaseActivity
 import com.example.hi_library.restful.HiResponse

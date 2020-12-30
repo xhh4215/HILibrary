@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.asproj.biz.LoginActivity;
 
@@ -13,6 +15,8 @@ import com.example.asproj.logic.MainActivityLogic;
 import com.example.asproj.logic.MainActivityLogic.ActivityProvider;
 import com.example.common.manager.ActivityManager;
 import com.example.common.ui.component.HiBaseActivity;
+
+import java.util.List;
 
 public class MainActivity extends HiBaseActivity implements ActivityProvider {
     private MainActivityLogic activityLogic;
@@ -23,7 +27,6 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
         setContentView(R.layout.activity_main);
         ActivityManager.Companion.getInstance().addFrontBackCallback(front -> Toast.makeText(MainActivity.this, "前后天切换", Toast.LENGTH_SHORT).show());
         activityLogic = new MainActivityLogic(this, savedInstanceState);
-         startActivity(new Intent(this, LoginActivity.class));
      }
 
     /***
@@ -41,5 +44,12 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
     }
 
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment fragment : fragments) {
+               fragment.onActivityResult(requestCode,resultCode,data);
+        }
+    }
 }

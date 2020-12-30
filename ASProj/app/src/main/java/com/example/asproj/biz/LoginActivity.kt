@@ -10,7 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.asproj.R
 import com.example.asproj.databinding.ActivityLoginBinding
-import com.example.asproj.http.api.AccountApi
+import com.example.asproj.http.api.accountapi.AccountApi
 import com.example.asproj.http.api.ApiFactory
 import com.example.common.ui.component.HiBaseActivity
 import com.example.common.utils.SPUtil
@@ -51,7 +51,6 @@ class LoginActivity : HiBaseActivity() {
             .enqueue(object : HiCallBack<String> {
                 override fun onSuccess(response: HiResponse<String>) =
                     if (response.code == HiResponse.SUCCESS) {
-                        showToast(getString(R.string.login_success))
                         //usermanager
                         val data = response.data
                         SPUtil.putString("boarding-pass", data!!)

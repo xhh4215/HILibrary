@@ -20,15 +20,14 @@ class BizInterceptor : IInterceptor {
         this.context = context
     }
 
-    override fun process(postcard: Postcard, callback: InterceptorCallback) {
-        val flag = postcard.extra
+    override fun process(postcard: Postcard?, callback: InterceptorCallback) {
+        val flag = postcard!!.extra
         when {
             (flag and (RouterFlag.FLAG_LOGIN) != 0) -> {
                 //login
                 callback.onInterrupt(RuntimeException("need login"))
                 loginInterceptor()
             }
-
             else -> {
                 callback.onContinue(postcard)
             }

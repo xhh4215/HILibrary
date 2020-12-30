@@ -2,6 +2,7 @@ package com.example.hi_library.restful
 
 import com.example.hi_library.restful.callback.HiCall
 import com.example.hi_library.restful.interceptor.HiInterceptor
+import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 import java.util.concurrent.ConcurrentHashMap
@@ -19,22 +20,30 @@ open class HiRestful constructor(val baseUrl: String, val callFactory: HiCall.Fa
         scheduler = Scheduler(callFactory, interceptors)
     }
 
+    /**
+     * { proxy, method, args ->
 
+
+    } as T
+     */
     fun <T> create(service: Class<T>): T {
         return Proxy.newProxyInstance(
             service.classLoader,
-            arrayOf<Class<*>>(service)
-        ) { proxy, method, args ->
-            var methodParser = methodService[method]
-            if (methodParser == null) {
-                methodParser = MethodParser.parse(baseUrl, method, args)
-                methodService.put(method, methodParser)
-            }
-            var request = methodParser.newRequest()
-            //callFactory.newCall(request)
-            scheduler.newCall(request)
+            arrayOf<Class<*>>(service),
+            object : InvocationHandler{
+                override fun invoke(proxy: Any, method: Method, args: Array<out Any>?): Any {
+                    var methodParser = methodService[method]
+                    if (methodParser == null) {
+                        methodParser = MethodParser.parse(baseUrl, method)
+                        methodService.put(method, methodParser)
+                    }
+                    var request = methodParser.newRequest(method,args)
+                    //callFactory.newCall(request)
+                   return  scheduler.newCall(request)
+                }
 
-        } as T
+            }
+        )  as T
     }
 
 }
