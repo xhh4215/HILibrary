@@ -1,6 +1,7 @@
-package com.example.hi_dataitem
+package com.example.hi_ui.ui.dataitem
 
 import android.content.Context
+import android.util.Log
 import android.util.SparseArray
 import android.util.SparseIntArray
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.*
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import java.lang.RuntimeException
 import java.lang.ref.WeakReference
@@ -20,14 +22,14 @@ import java.util.*
  * @date  2020年12月18
  */
 
-class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
     private var recyclerViewRef: WeakReference<RecyclerView>? = null
 
     //加载布局资源文件的对象
     private var mInflater = LayoutInflater.from(context)
 
     //存储显示的布局item的数据集合
-    private var dataSets = ArrayList<HiDataItem<*, out RecyclerView.ViewHolder>>()
+    private var dataSets = ArrayList<HiDataItem<*, out ViewHolder>>()
 
     //存储数据集合类型的集合
 //    private var typedArray = SparseArray<HiDataItem<*, out RecyclerView.ViewHolder>>()
@@ -58,7 +60,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
      * 添加footerView
      */
     fun addFooterView(view: View) {
-        if (footers.indexOfValue(view) < 0) {
+         if (footers.indexOfValue(view) < 0) {
             footers.put(BASE_ITEM_TYPE_FOOTER++, view)
             notifyItemInserted(itemCount)
         }
@@ -105,7 +107,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
      * item：添加的item
      * notify：是否进行刷新
      */
-    fun addItemAt(index: Int, dataItem: HiDataItem<*, RecyclerView.ViewHolder>, notify: Boolean) {
+    fun addItemAt(index: Int, dataItem: HiDataItem<*, ViewHolder>, notify: Boolean) {
         if (index > 0) {
             dataSets.add(index, dataItem)
         } else {
@@ -121,7 +123,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     /***
      * 添加多个显示的item
      */
-    fun addItems(items: List<HiDataItem<*, out RecyclerView.ViewHolder>>, notify: Boolean) {
+    fun addItems(items: List<HiDataItem<*, out ViewHolder>>, notify: Boolean) {
         val start = dataSets.size
 
         items.forEach { dataItem ->
@@ -136,9 +138,9 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     /***
      * 通过下标删除item
      */
-    fun removeItemAt(index: Int): HiDataItem<*, out RecyclerView.ViewHolder>? {
+    fun removeItemAt(index: Int): HiDataItem<*, out ViewHolder>? {
         return if (index > 0 && index < dataSets.size) {
-            val removeData: HiDataItem<*, out RecyclerView.ViewHolder> = dataSets.removeAt(index)
+            val removeData: HiDataItem<*, out ViewHolder> = dataSets.removeAt(index)
             notifyItemRemoved(index)
             removeData
         } else {
@@ -169,7 +171,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
             return headers.keyAt(position)
         }
         if (isFooterPosition(position)) {
-            //footer的位置要计算
+             //footer的位置要计算
             val footerPosition = position - getHeaderSize() - getOriginalItemSize()
             return footers.keyAt(footerPosition)
         }
@@ -181,7 +183,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):  ViewHolder {
         if (headers.indexOfKey(viewType) > 0) {
             val view = headers[viewType]
             return object : RecyclerView.ViewHolder(view) {}
@@ -196,6 +198,8 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         //为了解决dataItem成员变量binding, 刷新之后无法被复用的问题
         val position = typePosition.get(viewType)
         val dataItem = dataSets[position]
+        val vh = dataItem.onCreateViewHolder(parent)
+        if (vh != null) return vh
         var view: View? = dataItem.getItemView(parent)
         if (view == null) {
             val layoutRes = dataItem.getItemLayoutRes()
@@ -207,7 +211,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         return createViewHolderInternal(dataItem.javaClass, view)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Footer 和Header 由View自行绑定
         if (isHeaderPosition(position) || isFooterPosition(position)) {
             return
@@ -223,9 +227,9 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
      * 获取DataItem的范型参数的类型同时对ViewHolder进行创建
      */
     private fun createViewHolderInternal(
-        javaClass: Class<HiDataItem<*, out RecyclerView.ViewHolder>>,
+        javaClass: Class<HiDataItem<*, out ViewHolder>>,
         view: View?
-    ): RecyclerView.ViewHolder {
+    ): ViewHolder {
         //获取父类
         val superclass = javaClass.genericSuperclass
         //判断是不是参数范型类型的
@@ -233,18 +237,22 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
             //获取范型参数集合
             val arguments = superclass.actualTypeArguments
             for (argument in arguments) {
-                if (argument is Class<*> && RecyclerView.ViewHolder::class.java.isAssignableFrom(
+                if (argument is Class<*> && ViewHolder::class.java.isAssignableFrom(
                         argument
                     )
                 ) {
-                    return argument.getConstructor(View::class.java)
-                        .newInstance(view) as RecyclerView.ViewHolder
+                    try {
+                        //如果是，则使用反射 实例化类上标记的实际的泛型对象
+                        //这里需要  try-catch 一把，如果咱们直接在HiDataItem子类上标记 RecyclerView.ViewHolder，抽象类是不允许反射的
+                        return argument.getConstructor(View::class.java).newInstance(view) as ViewHolder
+                    } catch (e: Throwable) {
+                        e.printStackTrace()
+
+                    }
                 }
             }
         }
-        return object : RecyclerView.ViewHolder(view!!) {
-
-        }
+        return object : ViewHolder(view!!) {}
     }
 
 
@@ -349,6 +357,11 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
 
             dataItem.onViewAttachedToWindow(holder)
         }
+    }
+
+    fun clearItems() {
+        dataSets.clear()
+        notifyDataSetChanged()
     }
 
 

@@ -1,3 +1,5 @@
 <resources>
     <string name="if_detail">&#xeb93;</string>
+    <string name="list_empty_desc">小朋友你是否有很多问好？</string>
+    <string name="list_empty_action">刷新试试？</string>
 </resources>

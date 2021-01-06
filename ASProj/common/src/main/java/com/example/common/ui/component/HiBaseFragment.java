@@ -28,5 +28,15 @@ public abstract class HiBaseFragment extends Fragment {
         return layoutView;
     }
 
+    /***
+     * 检查宿主是不是还活着
+     * @return
+     */
+    public boolean isAlive() {
+        if (isRemoving() || isDetached() || getActivity() == null) {
+            return false;
+        }
+        return true;
+    }
 
 }

@@ -159,7 +159,7 @@ public class HiBannerAdapter extends PagerAdapter {
     public static class HiBannerViewHolder {
 
         private SparseArray<View> viewSparseArray;
-        View rootView;
+        public View rootView;
 
         public HiBannerViewHolder(View rootView) {
             this.rootView = rootView;

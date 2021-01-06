@@ -32,7 +32,6 @@ public interface HiRefresh {
     interface HiRefreshListener {
         //下拉刷新的回调
         void onRefresh();
-
         //是否开启下拉刷新
         boolean enableRefresh();
     }

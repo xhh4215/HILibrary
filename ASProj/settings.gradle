@@ -10,6 +10,3 @@ include 'hiui'
 project(':hiui').projectDir = "../hiui/hi-ui" as File
 
 
-
-include 'hidataitem'
-project(':hidataitem').projectDir = "../hidataitem/hi-dataitem" as File

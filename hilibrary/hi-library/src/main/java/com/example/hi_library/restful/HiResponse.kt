@@ -55,4 +55,6 @@ open class HiResponse<T> {
 
         // 错误信息
         var msg: String? = null
+
+    fun successfull() = code== SUCCESS
     }

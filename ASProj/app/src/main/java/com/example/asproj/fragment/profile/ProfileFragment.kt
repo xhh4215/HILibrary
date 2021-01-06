@@ -1,6 +1,5 @@
 package com.example.asproj.fragment.profile
 
-import android.accounts.Account
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
@@ -23,6 +22,7 @@ import com.example.asproj.http.api.ApiFactory
 import com.example.asproj.http.model.CourseNotice
 import com.example.asproj.http.model.Notice
 import com.example.asproj.http.model.UserProfile
+import com.example.asproj.rote.HiRoute
 import com.example.common.ui.component.HiBaseFragment
 import com.example.common.ui.view.IconFontTextView
 import com.example.common.ui.view.loadCircle
@@ -32,22 +32,12 @@ import com.example.hi_library.restful.HiResponse
 import com.example.hi_library.restful.callback.HiCallBack
 import com.example.hi_ui.ui.banner.core.HiBanner
 import com.example.hi_ui.ui.banner.core.HiBannerMo
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : HiBaseFragment() {
     private val REQUEST_CODE_LOGIN_PROFILE = 1001
-    private lateinit var itemCourse: IconFontTextView
-    private lateinit var itemCollection: IconFontTextView
-    private lateinit var itemAddress: IconFontTextView
-    private lateinit var itemHistory: IconFontTextView
-    private lateinit var userName: TextView
-    private lateinit var userAvatar: ImageView
-    private lateinit var loginDesc: TextView
-    private lateinit var tabItemCollection: TextView
-    private lateinit var tabItemHistory: TextView
-    private lateinit var tabItemLearn: TextView
-    private lateinit var loginBanner: HiBanner
-    private lateinit var notifyCount: TextView
-    private val ITEM_PLACE_HOLDER = "   "
+
+     private val ITEM_PLACE_HOLDER = "   "
     override fun getLayoutId(): Int {
         return R.layout.fragment_profile
     }
@@ -60,38 +50,18 @@ class ProfileFragment : HiBaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //设置底部四个功能item的入口图标
-        itemCourse = layoutView.findViewById(R.id.item_course)
-        itemCourse.setText(R.string.if_notify)
-        itemCourse.append(ITEM_PLACE_HOLDER + getString(R.string.item_course_text))
 
-        itemCollection = layoutView.findViewById(R.id.item_collection)
-        itemCollection.setText(R.string.if_collection)
-        itemCollection.append(ITEM_PLACE_HOLDER + getString(R.string.item_collection_text))
+        item_course.setText(R.string.if_notify)
+        item_course.append(ITEM_PLACE_HOLDER + getString(R.string.item_course_text))
 
-        itemAddress = layoutView.findViewById(R.id.item_address)
-        itemAddress.setText(R.string.if_address)
-        itemAddress.append(ITEM_PLACE_HOLDER + getString(R.string.item_address_text))
+        item_collection.setText(R.string.if_collection)
+        item_collection.append(ITEM_PLACE_HOLDER + getString(R.string.item_collection_text))
 
-        itemHistory = layoutView.findViewById(R.id.item_history)
-        itemHistory.setText(R.string.if_history)
-        itemHistory.append(ITEM_PLACE_HOLDER + getString(R.string.item_history_text))
+        item_address.setText(R.string.if_address)
+        item_address.append(ITEM_PLACE_HOLDER + getString(R.string.item_address_text))
 
-        userName = layoutView.findViewById(R.id.user_name)
-
-        userAvatar = layoutView.findViewById(R.id.user_avatar)
-
-        loginDesc = layoutView.findViewById(R.id.login_desc)
-
-        tabItemCollection = layoutView.findViewById(R.id.tab_item_collection)
-
-        tabItemHistory = layoutView.findViewById(R.id.tab_item_history)
-
-        tabItemLearn = layoutView.findViewById(R.id.tab_item_learn)
-
-        loginBanner = layoutView.findViewById(R.id.login_banner)
-
-        notifyCount = layoutView.findViewById(R.id.notify_count)
-
+        item_history.setText(R.string.if_history)
+        item_history.append(ITEM_PLACE_HOLDER + getString(R.string.item_history_text))
         queryCourseNoticeData()
 
         queryLoginUserData()
@@ -127,17 +97,13 @@ class ProfileFragment : HiBaseFragment() {
         ApiFactory.create(AccountApi::class.java).notice()
             .enqueue(object : HiCallBack<CourseNotice> {
                 override fun onSuccess(response: HiResponse<CourseNotice>) {
-                    if (response.code == HiResponse.SUCCESS && response.data != null && response.data!!.total > 0) {
-
-                        notifyCount.visibility = View.VISIBLE
-                        notifyCount.text = response.data!!.total.toString()
-                    } else {
-                        showToast(response.msg)
+                    if (response.data != null && response.data!!.total > 0) {
+                        notify_count.visibility = View.VISIBLE
+                        notify_count.text = response.data!!.total.toString()
                     }
                 }
 
                 override fun onFailed(throwable: Throwable) {
-                    showToast(throwable.message)
                 }
 
             })
@@ -158,28 +124,28 @@ class ProfileFragment : HiBaseFragment() {
      * 更新UI的操作
      */
     private fun updateUI(userProfile: UserProfile) {
-        userName.text =
+        user_name.text =
             if (userProfile.isLogin) userProfile.userName else getString(R.string.profile_not_login)
-        loginDesc.text =
+        login_desc.text =
             if (userProfile.isLogin) getString(R.string.profile_login_desc_welcome_back) else getString(
                 R.string.profile_login_desc
             )
-        tabItemCollection.text = spannableTabItem(
+        tab_item_collection.text = spannableTabItem(
             userProfile.favoriteCount,
             getString(R.string.profile_tab_item_collection)
         )
         if (userProfile.isLogin) {
-            userAvatar.loadCircle(userProfile.userIcon)
+            user_avatar.loadCircle(userProfile.userIcon)
         } else {
-            userAvatar.setImageResource(R.drawable.ic_avatar_default)
-            userAvatar.setOnClickListener {
+            user_avatar.setImageResource(R.drawable.ic_avatar_default)
+            user_avatar.setOnClickListener {
                 ARouter.getInstance().build("/account/login")
                     .navigation(activity, REQUEST_CODE_LOGIN_PROFILE)
             }
         }
-        tabItemHistory.text =
+        tab_item_history.text =
             spannableTabItem(userProfile.browseCount, getString(R.string.profile_tab_item_history))
-        tabItemLearn.text =
+        tab_item_learn.text =
             spannableTabItem(userProfile.learnMinutes, getString(R.string.profile_tab_item_learn))
         updateBanner(userProfile.bannerNoticeList)
     }
@@ -195,16 +161,15 @@ class ProfileFragment : HiBaseFragment() {
             hiBannerMo.url = it.cover
             models.add(hiBannerMo)
         }
-        loginBanner.setBannerData(R.layout.layout_profile_banner_item, models)
-        loginBanner.setBindAdapter { viewHolder, mo, position ->
+        login_banner.setBannerData(R.layout.layout_profile_banner_item, models)
+        login_banner.setBindAdapter { viewHolder, mo, position ->
             if (viewHolder == null || mo == null) return@setBindAdapter
             val imageView = viewHolder.findViewById<ImageView>(R.id.banner_item_imageView)
             imageView.loadCorner(mo.url, HiDisplayUtil.dp2px(10f, resources))
         }
-        loginBanner.visibility = View.VISIBLE
-        loginBanner.setOnBannerClickListener { viewHolder, bannerMo, position ->
-            var intent = Intent(Intent.ACTION_VIEW, Uri.parse(bannerNoticeList[position].url))
-            startActivity(intent)
+        login_banner.visibility = View.VISIBLE
+        login_banner.setOnBannerClickListener { viewHolder, bannerMo, position ->
+            HiRoute.startActivity4Browser(bannerNoticeList[position].url)
         }
     }
 

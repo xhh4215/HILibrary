@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.hi_ui.ui.refresh.HiRefreshLayout
+            android:id="@+id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.example.common.ui.view.HiRecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.example.hi_ui.ui.refresh.HiRefreshLayout>
+
+        <com.example.common.ui.view.EmptyView
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/content_Loading"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/color_999" />
+    </FrameLayout>
+</layout>

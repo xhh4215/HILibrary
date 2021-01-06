@@ -1,4 +1,4 @@
-package com.example.common.utils
+package com.example.hi_library.log.utils
 
 import android.app.Application
 

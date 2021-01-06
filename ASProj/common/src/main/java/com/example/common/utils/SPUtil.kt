@@ -3,6 +3,7 @@ package com.example.common.utils
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.hi_library.log.utils.AppGlobals
 
 /***
  * 一个SharePreference工具类

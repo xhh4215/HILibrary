@@ -1,43 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
 
-    <LinearLayout
+    android:orientation="vertical">
+
+    <com.example.common.ui.view.IconFontTextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_height="@dimen/dp_35"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/color_9fa"
+        android:text="@string/home_search_hint"
+        android:background="@drawable/shape_home_search" />
+    <com.example.hi_ui.ui.tab.top.HiTabTopLayout
+        android:id="@+id/top_tab_layout"
+        android:layout_width="match_parent"
+        android:background="@color/color_white"
+        android:layout_height="@dimen/dp_45"/>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="个人中心" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/vip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="会员权益" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="账户充值" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/global"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="全局降级策略" />
-    </LinearLayout>
-
-
-</FrameLayout>
+</LinearLayout>

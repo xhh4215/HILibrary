@@ -17,7 +17,7 @@ import  com.example.hi_ui.ui.refresh.HiOverView.HiRefreshState;
 
 /***
  * @date 2020年12月15日
- * @desc 下拉刷新组件
+ * @desc 下拉刷新组件的容器控件
  * @autohr 栾桂明
  */
 public class HiRefreshLayout extends FrameLayout implements HiRefresh {
@@ -40,8 +40,6 @@ public class HiRefreshLayout extends FrameLayout implements HiRefresh {
         super(context);
         init();
     }
-
-
     public HiRefreshLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();

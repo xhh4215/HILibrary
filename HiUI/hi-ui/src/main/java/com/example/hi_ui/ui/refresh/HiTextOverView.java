@@ -18,15 +18,15 @@ public class HiTextOverView extends HiOverView {
     private TextView mTextView;
     private View mRotateView;
 
-    public HiTextOverView(@NonNull Context context) {
+    public HiTextOverView( Context context) {
         super(context);
     }
 
-    public HiTextOverView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public HiTextOverView( Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public HiTextOverView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public HiTextOverView( Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
