@@ -9,12 +9,22 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+/***
+ * @description HIBanner组件对外提供功能的接口
+ * @author 栾桂明
+ * @date 2020 年 1月6日
+ */
 public interface IHiBanner {
+    /***
+     * 设置HIBanner组件绑定的数据
+     * @param layoutResId
+     * @param models
+     */
     void setBannerData(@LayoutRes int layoutResId, @NotNull List<? extends HiBannerMo> models);
 
     void setBannerData(@NotNull List<? extends HiBannerMo> models);
 
-    void setHaIndicator(HiIndicator<?> haIndicator);
+    void setHiIndicator(HiIndicator<?> haIndicator);
 
     void setAutoPlay(boolean autoPlay);
 
@@ -29,7 +39,7 @@ public interface IHiBanner {
 
     void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener);
 
-    void setOnBannerClickListener(OnBannerClickListener onBannerClickListener);
+    void setOnBannerClickListener(HiBanner.OnBannerClickListener onBannerClickListener);
 
     interface OnBannerClickListener {
         void onBannerClick(@NotNull HiBannerAdapter.HiBannerViewHolder viewHolder, @NotNull HiBannerMo bannerMo, int position);

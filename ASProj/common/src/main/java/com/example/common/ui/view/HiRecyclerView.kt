@@ -45,7 +45,6 @@ class HiRecyclerView @JvmOverloads constructor(
 
             if (newState == SCROLL_STATE_DRAGGING && (canScrollVertical || arriveBottom)) {
                 //判断recyclerView是不是能滑动
-
                 addFooterView()
             }
             //不能在滑动停止的时候添加 footer view

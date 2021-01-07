@@ -52,7 +52,7 @@ android {
         enabled = true
     }
 }
-androidExtensions{
+androidExtensions {
     experimental = true
 }
 
@@ -67,7 +67,7 @@ dependencies {
     api "com.alibaba:arouter-api:$arouter_api_version"
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
     implementation project(path: ':common')
-     implementation project(path: ':hilibrary')
+    implementation project(path: ':hilibrary')
     implementation project(path: ':hiui')
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

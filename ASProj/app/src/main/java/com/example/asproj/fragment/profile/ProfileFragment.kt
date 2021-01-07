@@ -3,6 +3,7 @@ package com.example.asproj.fragment.profile
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
@@ -27,6 +28,7 @@ import com.example.common.ui.view.loadCorner
 import com.example.hi_library.utils.HiDisplayUtil
 import com.example.hi_library.restful.HiResponse
 import com.example.hi_library.restful.callback.HiCallBack
+import com.example.hi_library.utils.AppGlobals
 import com.example.hi_ui.ui.banner.core.HiBannerMo
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -157,6 +159,9 @@ class ProfileFragment : HiBaseFragment() {
             hiBannerMo.url = it.cover
             models.add(hiBannerMo)
         }
+        login_banner.setOnBannerClickListener { viewHolder, bannerMo, position ->
+            HiRoute.startActivity4Browser(bannerNoticeList[position].url)
+        }
         login_banner.setBannerData(R.layout.layout_profile_banner_item, models)
         login_banner.setBindAdapter { viewHolder, mo, position ->
             if (viewHolder == null || mo == null) return@setBindAdapter
@@ -164,9 +169,7 @@ class ProfileFragment : HiBaseFragment() {
             imageView.loadCorner(mo.url, HiDisplayUtil.dp2px(10f, resources))
         }
         login_banner.visibility = View.VISIBLE
-        login_banner.setOnBannerClickListener { viewHolder, bannerMo, position ->
-            HiRoute.startActivity4Browser(bannerNoticeList[position].url)
-        }
+
     }
 
     /**

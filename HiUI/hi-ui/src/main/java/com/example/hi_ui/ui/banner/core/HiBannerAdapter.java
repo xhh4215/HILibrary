@@ -1,6 +1,7 @@
 package com.example.hi_ui.ui.banner.core;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,8 @@ public class HiBannerAdapter extends PagerAdapter {
 
 
     public void setOnBannerClickListener(IHiBanner.OnBannerClickListener onBannerClickListener) {
-        this.mBannerClickListener = onBannerClickListener;
+         this.mBannerClickListener = onBannerClickListener;
+
     }
 
     public void setLayoutResId(@LayoutRes int layoutResId) {
@@ -111,7 +113,7 @@ public class HiBannerAdapter extends PagerAdapter {
         if (container.equals(viewHolder.rootView.getParent())) {
             container.removeView(viewHolder.rootView);
         }
-        onBind(viewHolder, models.get(realPosition), position);
+         onBind(viewHolder, models.get(realPosition), realPosition);
         if (viewHolder.rootView.getParent() != null) {
             ((ViewGroup) viewHolder.rootView.getParent()).removeView(viewHolder.rootView);
         }
@@ -133,7 +135,7 @@ public class HiBannerAdapter extends PagerAdapter {
     protected void onBind(@NotNull final HiBannerViewHolder viewHolder, @NotNull final HiBannerMo bannerMo, int position) {
         viewHolder.rootView.setOnClickListener(v -> {
             if (mBannerClickListener != null) {
-                mBannerClickListener.onBannerClick(viewHolder, bannerMo, position);
+                 mBannerClickListener.onBannerClick(viewHolder, bannerMo, position);
             }
         });
         if (mBindAdapter != null) {

@@ -1,6 +1,7 @@
 package com.example.hi_ui.ui.banner.core;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import androidx.viewpager.widget.ViewPager;
@@ -48,9 +49,23 @@ public class HiBannerDelegate implements IHiBanner, ViewPager.OnPageChangeListen
     public void setBannerData(@NotNull List<? extends HiBannerMo> models) {
         setBannerData(R.layout.hi_banner_item_image, models);
     }
+    public void setAdapter(HiBannerAdapter adapter) {
+        this.mAdapter = adapter;
+    }
 
     @Override
-    public void setHaIndicator(HiIndicator<?> haIndicator) {
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
+        this.mOnPageChangeListener = onPageChangeListener;
+    }
+
+    @Override
+    public void setOnBannerClickListener(HiBanner.OnBannerClickListener onBannerClickListener) {
+          this.mOnBannerClickListener = onBannerClickListener;
+
+    }
+
+    @Override
+    public void setHiIndicator(HiIndicator<?> haIndicator) {
         this.mHiIndicator = haIndicator;
     }
 
@@ -94,19 +109,13 @@ public class HiBannerDelegate implements IHiBanner, ViewPager.OnPageChangeListen
         }
     }
 
-    @Override
-    public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
-        this.mOnPageChangeListener = onPageChangeListener;
-    }
-
-    @Override
-    public void setOnBannerClickListener(OnBannerClickListener onBannerClickListener) {
-        this.mOnBannerClickListener = onBannerClickListener;
-    }
 
     private void init(int layoutResId) {
+
+        Log.d("tag","1");
         if (mAdapter == null) {
             mAdapter = new HiBannerAdapter(mContext);
+
         }
         if (mHiIndicator == null) {
             mHiIndicator = new HiCircleIndicator(mContext);

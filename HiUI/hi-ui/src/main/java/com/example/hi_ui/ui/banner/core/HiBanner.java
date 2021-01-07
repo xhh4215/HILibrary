@@ -3,6 +3,7 @@ package com.example.hi_ui.ui.banner.core;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -68,8 +69,8 @@ public class HiBanner extends FrameLayout implements IHiBanner {
     }
 
     @Override
-    public void setHaIndicator(HiIndicator<?> haIndicator) {
-        delegate.setHaIndicator(haIndicator);
+    public void setHiIndicator(HiIndicator<?> haIndicator) {
+        delegate.setHiIndicator(haIndicator);
     }
 
     @Override
@@ -104,6 +105,7 @@ public class HiBanner extends FrameLayout implements IHiBanner {
 
     @Override
     public void setOnBannerClickListener(OnBannerClickListener onBannerClickListener) {
-        delegate.setOnBannerClickListener(onBannerClickListener);
+
+         delegate.setOnBannerClickListener(onBannerClickListener);
     }
 }
