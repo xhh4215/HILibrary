@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.asproj.R
 import com.example.asproj.http.model.GoodsModel
 import com.example.common.ui.view.loadUrl
-import com.example.hi_library.log.utils.HiDisplayUtil
+import com.example.hi_library.utils.HiDisplayUtil
 import com.example.hi_ui.ui.dataitem.HiDataItem
 import kotlinx.android.synthetic.main.layout_home_goods_list_item1.view.*
 import kotlinx.android.synthetic.main.layout_home_operation_grid_item.view.item_image

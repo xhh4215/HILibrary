@@ -2,6 +2,7 @@ package com.example.asproj;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.example.asproj.logic.MainActivityLogic;
 import com.example.asproj.logic.MainActivityLogic.ActivityProvider;
 import com.example.common.manager.ActivityManager;
 import com.example.common.ui.component.HiBaseActivity;
+import com.example.hi_library.utils.HiStatusBarUtil;
 
 import java.util.List;
 
@@ -25,8 +27,8 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ActivityManager.Companion.getInstance().addFrontBackCallback(front -> Toast.makeText(MainActivity.this, "前后天切换", Toast.LENGTH_SHORT).show());
         activityLogic = new MainActivityLogic(this, savedInstanceState);
+        HiStatusBarUtil.INSTANCE.setStatusBar(this,true, Color.WHITE,false);
      }
 
     /***

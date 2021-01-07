@@ -1,4 +1,4 @@
-package com.example.hi_library.log.utils;
+package com.example.hi_library.utils;
 
 public class HiStackTraceUtil {
     /***

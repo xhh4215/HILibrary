@@ -184,11 +184,11 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):  ViewHolder {
-        if (headers.indexOfKey(viewType) > 0) {
+        if (headers.indexOfKey(viewType) >= 0) {
             val view = headers[viewType]
             return object : RecyclerView.ViewHolder(view) {}
         }
-        if (footers.indexOfKey(viewType) > 0) {
+        if (footers.indexOfKey(viewType) >= 0) {
             val view = footers[viewType]
             return object : RecyclerView.ViewHolder(view) {}
         }

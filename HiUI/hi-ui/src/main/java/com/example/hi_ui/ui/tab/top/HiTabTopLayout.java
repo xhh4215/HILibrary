@@ -10,9 +10,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 
-import com.example.hi_library.log.utils.HiDisplayUtil;
-import com.example.hi_ui.ui.tab.bottom.HiTabBottom;
-import com.example.hi_ui.ui.tab.bottom.HiTabBottomInfo;
+import com.example.hi_library.utils.HiDisplayUtil;
 import com.example.hi_ui.ui.tab.common.IHiTabLayout;
 
 import java.util.ArrayList;

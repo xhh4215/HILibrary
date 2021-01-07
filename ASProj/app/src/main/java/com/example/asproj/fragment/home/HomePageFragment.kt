@@ -17,6 +17,7 @@ import com.example.asproj.http.model.TabCategory
 import com.example.common.ui.component.HiBaseFragment
 import com.example.hi_library.restful.HiResponse
 import com.example.hi_library.restful.callback.HiCallBack
+import com.example.hi_ui.ui.tab.bottom.HiTabBottomLayout
 import com.example.hi_ui.ui.tab.top.HiTabTopInfo
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -29,6 +30,7 @@ class HomePageFragment : HiBaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        HiTabBottomLayout.clipBottomPadding(view_pager)
         queryTabList()
     }
 

@@ -5,6 +5,7 @@ plugins {
     id 'com.alibaba.arouter'
     id 'kotlin-android-extensions'
 
+
 }
 
 
@@ -50,6 +51,9 @@ android {
     dataBinding {
         enabled = true
     }
+}
+androidExtensions{
+    experimental = true
 }
 
 dependencies {

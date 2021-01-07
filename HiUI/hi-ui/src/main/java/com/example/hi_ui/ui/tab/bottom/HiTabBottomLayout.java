@@ -15,8 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hi_library.log.utils.HiDisplayUtil;
-import com.example.hi_library.log.utils.HiViewUtil;
+import com.example.hi_library.utils.HiDisplayUtil;
+import com.example.hi_library.utils.HiViewUtil;
 import com.example.hi_ui.R;
 import com.example.hi_ui.ui.tab.common.IHiTabLayout;
 
@@ -33,7 +33,7 @@ public class HiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
     //底部的bottom的透明度
     private float bottomAlpha = 1f;
     //tabBottom 高度
-    private float tabBottomHeight = 50;
+    private static float tabBottomHeight = 50;
     //tabBottom的线条高度
     private float bottomLineHeight = 0.5f;
     //tabBottom的线条的颜色
@@ -196,6 +196,12 @@ public class HiTabBottomLayout extends FrameLayout implements IHiTabLayout<HiTab
         }
         if (targetView != null) {
             targetView.setPadding(0, 0, 0, HiDisplayUtil.dp2px(tabBottomHeight, getResources()));
+            targetView.setClipToPadding(false);
+        }
+    }
+    public static void clipBottomPadding(ViewGroup targetView){
+        if (targetView != null) {
+            targetView.setPadding(0, 0, 0, HiDisplayUtil.dp2px(tabBottomHeight));
             targetView.setClipToPadding(false);
         }
     }

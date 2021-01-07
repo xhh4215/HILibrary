@@ -2,6 +2,7 @@ package com.example.asproj.biz
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
@@ -16,6 +17,8 @@ import com.example.common.ui.component.HiBaseActivity
 import com.example.common.utils.SPUtil
 import com.example.hi_library.restful.HiResponse
 import com.example.hi_library.restful.callback.HiCallBack
+import com.example.hi_library.utils.HiStatusBarUtil
+import com.example.hi_library.utils.HiStatusBarUtil.setStatusBar
 
 @Route(path = "/account/login")
 class LoginActivity : HiBaseActivity() {
@@ -28,6 +31,7 @@ class LoginActivity : HiBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStatusBar(this, true, Color.WHITE, false)
         loginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         loginBinding.actionBack.setOnClickListener {
             onBackPressed()

@@ -11,6 +11,7 @@ class MethodParser(
     val baseUrl: String,
     method: Method
 ) {
+    private   var replaceRelativeUrl: String?=null
     private var domainUrl: String? = null
     private var fromPost = true
     private var httpMethod: Int = 0
@@ -84,8 +85,8 @@ class MethodParser(
                     //要不替换的相对路径中的String
                     val replaceName = annotation.value
                     val replacement = value.toString()
-                    val newRelativeUrl = relativeUrl.replace("{$replaceName}", replacement)
-                    relativeUrl = newRelativeUrl
+                     replaceRelativeUrl = relativeUrl.replace("{$replaceName}", replacement)
+
                 }
                 else -> {
                     throw  IllegalStateException("can not handle parameter annotation${annotation.javaClass.toString()} ")
@@ -184,7 +185,7 @@ class MethodParser(
         request.httpMethod = httpMethod
         request.parameters = parameters
         request.returnType = returnType
-        request.relativeUrl = relativeUrl
+        request.relativeUrl =replaceRelativeUrl?:relativeUrl
         request.formPost = fromPost
         return request
     }

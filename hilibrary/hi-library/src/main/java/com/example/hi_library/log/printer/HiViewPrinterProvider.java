@@ -9,7 +9,7 @@ import android.widget.TextView;
 
  import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hi_library.log.utils.HiDisplayUtil;
+import com.example.hi_library.utils.HiDisplayUtil;
 
 
 public class HiViewPrinterProvider {

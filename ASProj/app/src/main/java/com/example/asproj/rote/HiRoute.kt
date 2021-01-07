@@ -2,7 +2,7 @@ package com.example.asproj.rote
 
 import android.content.Intent
 import android.net.Uri
-import com.example.hi_library.log.utils.AppGlobals
+import com.example.hi_library.utils.AppGlobals
 
 object HiRoute {
     fun startActivity4Browser(url: String) {

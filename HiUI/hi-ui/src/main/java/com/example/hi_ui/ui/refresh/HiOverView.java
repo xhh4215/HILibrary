@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.hi_library.log.utils.HiDisplayUtil;
+import com.example.hi_library.utils.HiDisplayUtil;
 
 /***
  * 下拉刷新的Overlay视图，可以重载这个类来定义自己的Overlay

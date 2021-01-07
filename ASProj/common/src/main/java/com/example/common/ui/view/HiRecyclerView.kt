@@ -40,12 +40,13 @@ class HiRecyclerView @JvmOverloads constructor(
             // 还有一种特殊的情况  canScrollVertical  是检查他能不能继续向下滑动
             // 特殊情况是 咱们的列表已经滑动到底部了，但是分页失败
             val lastVisibilityItem = findLastVisibleItem(recyclerView)
-            Log.d("lastVisibilityItem","$lastVisibilityItem")
             if (lastVisibilityItem <= 0) return
             val arriveBottom = lastVisibilityItem >= totalItemCount - 1
+
             if (newState == SCROLL_STATE_DRAGGING && (canScrollVertical || arriveBottom)) {
                 //判断recyclerView是不是能滑动
-                 addFooterView()
+
+                addFooterView()
             }
             //不能在滑动停止的时候添加 footer view
             if (newState != SCROLL_STATE_IDLE) {

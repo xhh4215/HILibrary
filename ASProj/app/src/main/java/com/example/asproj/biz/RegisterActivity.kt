@@ -2,6 +2,7 @@ package com.example.asproj.biz
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
@@ -9,16 +10,19 @@ import androidx.databinding.DataBindingUtil
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.asproj.R
 import com.example.asproj.databinding.ActivityRegisterBinding
-import com.example.asproj.http.api.accountapi.AccountApi
 import com.example.asproj.http.api.ApiFactory
+import com.example.asproj.http.api.accountapi.AccountApi
 import com.example.common.ui.component.HiBaseActivity
 import com.example.hi_library.restful.HiResponse
 import com.example.hi_library.restful.callback.HiCallBack
+import com.example.hi_library.utils.HiStatusBarUtil.setStatusBar
+
 @Route(path = "/account/registration")
 class RegisterActivity : HiBaseActivity() {
     private lateinit var registerBinding: ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStatusBar(this, true, Color.WHITE, false)
         registerBinding = DataBindingUtil.setContentView(this, R.layout.activity_register)
         registerBinding.actionBack.setOnClickListener {
             onBackPressed()

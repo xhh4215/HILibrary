@@ -3,7 +3,7 @@ package com.example.hi_library.log.common;
 
 
 import com.example.hi_library.log.printer.HiLogPrinter;
-import com.example.hi_library.log.utils.HiStackTraceUtil;
+import com.example.hi_library.utils.HiStackTraceUtil;
 
 import org.jetbrains.annotations.NotNull;
 

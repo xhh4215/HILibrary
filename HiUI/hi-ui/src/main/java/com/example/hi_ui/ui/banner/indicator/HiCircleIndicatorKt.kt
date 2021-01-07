@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
-import com.example.hi_library.log.utils.HiDisplayUtil
+import com.example.hi_library.utils.HiDisplayUtil
 import com.example.hi_ui.R
 
 class HiCircleIndicatorKt @JvmOverloads constructor(

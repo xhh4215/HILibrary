@@ -1,7 +1,6 @@
 package com.example.hi_ui.ui.banner.indicator;
 
 import android.content.Context;
-import android.media.Image;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.hi_library.log.utils.HiDisplayUtil;
+import com.example.hi_library.utils.HiDisplayUtil;
 import com.example.hi_ui.R;
 
 /***

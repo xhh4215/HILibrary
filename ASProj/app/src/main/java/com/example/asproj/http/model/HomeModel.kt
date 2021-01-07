@@ -8,7 +8,12 @@ val goodsList: List<GoodsModel>?)
 data class TabCategory(val categoryId:String,val categoryName:String,val goodsCount:String)
 
 data class HomeBanner(val cover:String,val createTime:String,val id:String,val sticky:Int,
-      val  subtitle:String,val title:String,val type:String,val url:String)
+      val  subtitle:String,val title:String,val type:String,val url:String){
+    companion object{
+        const val TYPE_GOODS ="goods"
+        const val TYPE_RECOMMEND ="recommend"
+    }
+}
 
 data class Subcategory(val categoryId: String, val groupName:Any,val showType:String,
     val subcategoryIcon:String,val subcategoryId:String,val subcategoryName:String)

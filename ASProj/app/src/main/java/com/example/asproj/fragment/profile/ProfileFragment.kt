@@ -3,7 +3,6 @@ package com.example.asproj.fragment.profile
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
-import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
@@ -13,7 +12,6 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.asproj.R
@@ -24,13 +22,11 @@ import com.example.asproj.http.model.Notice
 import com.example.asproj.http.model.UserProfile
 import com.example.asproj.rote.HiRoute
 import com.example.common.ui.component.HiBaseFragment
-import com.example.common.ui.view.IconFontTextView
 import com.example.common.ui.view.loadCircle
 import com.example.common.ui.view.loadCorner
-import com.example.hi_library.log.utils.HiDisplayUtil
+import com.example.hi_library.utils.HiDisplayUtil
 import com.example.hi_library.restful.HiResponse
 import com.example.hi_library.restful.callback.HiCallBack
-import com.example.hi_ui.ui.banner.core.HiBanner
 import com.example.hi_ui.ui.banner.core.HiBannerMo
 import kotlinx.android.synthetic.main.fragment_profile.*
 
