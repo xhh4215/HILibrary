@@ -36,7 +36,7 @@ class HomeTabFragment : HiAbsListFragment() {
         super.onViewCreated(view, savedInstanceState)
         queryTabCategoryList()
         enableLoadMore {
-             queryTabCategoryList()
+            queryTabCategoryList()
         }
     }
 
@@ -60,14 +60,14 @@ class HomeTabFragment : HiAbsListFragment() {
             .enqueue(object : HiCallBack<HomeModel> {
                 override fun onSuccess(response: HiResponse<HomeModel>) {
                     if (response.successfull() && response.data != null) {
-                         updateUI(response.data!!)
+                        updateUI(response.data!!)
                     } else {
                         finishRefresh(null)
                     }
                 }
 
                 override fun onFailed(throwable: Throwable) {
-                    //空数据页面
+                     //空数据页面
                     finishRefresh(null)
                 }
 
@@ -84,15 +84,15 @@ class HomeTabFragment : HiAbsListFragment() {
         data?.subcategoryList?.let {
             dataItems.add(GridItem(data.subcategoryList))
         }
-
-        data.goodsList?.forEachIndexed { index, goodsModel ->
-            dataItems.add(
+         data.goodsList?.forEachIndexed { index, goodsModel ->
+             dataItems.add(
                 GoodsItem(
                     goodsModel,
                     TextUtils.equals(categoryId, DEFAULT_HOT_TAB_CATEGORY_ID)
                 )
             )
         }
+
         finishRefresh(dataItems)
 
     }

@@ -116,7 +116,7 @@ open class HiAbsListFragment : HiBaseFragment(), HiRefresh.HiRefreshListener {
 
     @CallSuper
     override fun onRefresh() {
-        if (recyclerView?.isLaidOut == true) {
+        if (recyclerView?.isLoadingMore() == true) {
             //正在分页
             refreshLayout?.post {
                 refreshLayout?.refreshFinished()

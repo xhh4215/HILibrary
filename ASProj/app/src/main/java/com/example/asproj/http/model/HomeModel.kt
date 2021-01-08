@@ -15,7 +15,7 @@ data class HomeBanner(val cover:String,val createTime:String,val id:String,val s
     }
 }
 
-data class Subcategory(val categoryId: String, val groupName:Any,val showType:String,
+data class Subcategory(val categoryId: String, val groupName:String,val showType:String,
     val subcategoryIcon:String,val subcategoryId:String,val subcategoryName:String)
 
 

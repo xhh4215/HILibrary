@@ -13,32 +13,36 @@ import com.example.asproj.http.model.GoodsModel
 import com.example.common.ui.view.loadUrl
 import com.example.hi_library.utils.HiDisplayUtil
 import com.example.hi_ui.ui.dataitem.HiDataItem
+import com.example.hi_ui.ui.dataitem.HiViewHolder
+import kotlinx.android.synthetic.main.layout_home_goods_list_item1.*
 import kotlinx.android.synthetic.main.layout_home_goods_list_item1.view.*
 import kotlinx.android.synthetic.main.layout_home_operation_grid_item.view.item_image
 import kotlinx.android.synthetic.main.layout_home_operation_grid_item.view.item_title
 
 class GoodsItem(val goodsModel: GoodsModel, val hotTab: Boolean) :
-    HiDataItem<GoodsModel, RecyclerView.ViewHolder>(goodsModel) {
-    override fun onBindData(holder: RecyclerView.ViewHolder, position: Int) {
+    HiDataItem<GoodsModel, HiViewHolder>(goodsModel) {
+    val MAX_TAG_SIZE = 3
+    override fun onBindData(holder: HiViewHolder, position: Int) {
         val context = holder.itemView.context
-        val MAX_TAG_SIZE = 3
-        holder.itemView.item_image.loadUrl(goodsModel.sliderImage)
-        holder.itemView.item_title.text = goodsModel.goodsName
-        holder.itemView.item_price.text = goodsModel.marketPrice
-        holder.itemView.item_sale_desc.text = goodsModel.completedNumText
-        val itemLabelContainer = holder.itemView.item_label_container
+
+        holder.item_image.loadUrl(goodsModel.sliderImage)
+        holder.item_title.text = goodsModel.goodsName
+        holder.item_price.text = goodsModel.marketPrice
+        holder.item_sale_desc.text = goodsModel.completedNumText
+        val itemLabelContainer = holder.item_label_container
         if (!TextUtils.isEmpty(goodsModel.tags)) {
             itemLabelContainer.visibility = View.VISIBLE
             val split = goodsModel.tags.split(" ")
+
             for (index in split.indices) {
+                val childCount = itemLabelContainer.childCount
                 if (index > MAX_TAG_SIZE - 1) {
-                    val childCount = itemLabelContainer.childCount
                     for (index in childCount - 1 downTo MAX_TAG_SIZE - 1) {
                         itemLabelContainer.removeViewAt(index)
                     }
                     break
                 }
-                val labelView: TextView = if (index > itemLabelContainer.childCount - 1) {
+                val labelView: TextView = if (index > childCount - 1) {
                     val view = createLabelView(context, index != 0)
                     itemLabelContainer.addView(view)
                     view

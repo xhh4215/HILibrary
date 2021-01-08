@@ -17,12 +17,13 @@ import com.example.hi_ui.ui.banner.core.HiBannerAdapter
 import com.example.hi_ui.ui.banner.core.HiBannerMo
 import com.example.hi_ui.ui.banner.core.IHiBanner
 import com.example.hi_ui.ui.dataitem.HiDataItem
+import com.example.hi_ui.ui.dataitem.HiViewHolder
 
 class BannerItem(val list: List<HomeBanner>) :
-    HiDataItem<List<HomeBanner>, RecyclerView.ViewHolder>(list) {
+    HiDataItem<List<HomeBanner>, HiViewHolder>(list) {
 
 
-    override fun onBindData(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindData(holder: HiViewHolder, position: Int) {
         val banner = holder.itemView as HiBanner
         val models = mutableListOf<HiBannerMo>()
         list.forEachIndexed { index, homeBanner ->
@@ -30,22 +31,15 @@ class BannerItem(val list: List<HomeBanner>) :
             bannerMo.url = homeBanner.cover
             models.add(bannerMo)
         }
-        banner.setOnBannerClickListener(object : IHiBanner.OnBannerClickListener {
-            override fun onBannerClick(
-                viewHolder: HiBannerAdapter.HiBannerViewHolder,
-                bannerMo: HiBannerMo,
-                position: Int
-            ) {
-                val homeBanner = list[position]
-                if (TextUtils.equals(homeBanner.type, HomeBanner.TYPE_GOODS)) {
-                    Toast.makeText(holder.itemView.context, "跳转详情页", Toast.LENGTH_SHORT).show()
-                } else {
-                    HiRoute.startActivity4Browser(homeBanner.url)
+        banner.setOnBannerClickListener { viewHolder, bannerMo, position ->
+            val homeBanner = list[position]
+            if (TextUtils.equals(homeBanner.type, HomeBanner.TYPE_GOODS)) {
+                Toast.makeText(holder.itemView.context, "跳转详情页", Toast.LENGTH_SHORT).show()
+            } else {
+                HiRoute.startActivity4Browser(homeBanner.url)
 
-                }
             }
-
-        })
+        }
         banner.setBannerData(models)
         banner.setBindAdapter { viewHolder, mo, position ->
             ((viewHolder.rootView) as ImageView).loadUrl(mo.url)

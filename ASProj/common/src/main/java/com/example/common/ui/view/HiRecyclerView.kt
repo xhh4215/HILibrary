@@ -2,8 +2,7 @@ package com.example.common.ui.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
-import android.view.LayoutInflater
+ import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -101,6 +100,7 @@ class HiRecyclerView @JvmOverloads constructor(
 
     fun enableLoadMore(callback: () -> Unit, prefetchSize: Int) {
         if (adapter !is HiAdapter) {
+            HiLog.e("enableLoadMore must use hiadapter")
             return
         }
         loadMoreScrollListener = LoadMoreScrollListener(prefetchSize, callback)
@@ -133,8 +133,9 @@ class HiRecyclerView @JvmOverloads constructor(
 
 
     fun loadFinished(success: Boolean) {
+
         if (adapter !is HiAdapter) {
-//            HiLog.e("enableLoadMore must be hiadapter")
+            HiLog.e("enableLoadMore must be hiadapter")
             return
         }
         isLoadingMore = false
