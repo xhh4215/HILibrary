@@ -106,7 +106,9 @@ class CategoryFragment : HiBaseFragment() {
 
 
     private val groupSpanSizeOffset = SparseIntArray()
-
+    private val decoration = CategoryItemDecoration({ position ->
+        subcategoryList[position].groupName
+    }, SPAN_COUNT)
     /***
      * 用来处理商品分组的自动换行
      */
@@ -151,6 +153,8 @@ class CategoryFragment : HiBaseFragment() {
     }
     private val subcategoryList = mutableListOf<Subcategory>()
     private fun onQuerySubcategoryListSuccess(data: List<Subcategory>) {
+        if (!isAlive)return
+        decoration.clear()
         groupSpanSizeOffset.clear()
         subcategoryList.clear()
         subcategoryList.addAll(data)
@@ -159,7 +163,7 @@ class CategoryFragment : HiBaseFragment() {
         }
         slider_view.bindContentView(
             itemCount = data.size,
-            itemDirection = null,
+            itemDirection = decoration,
             layoutManager = layoutManager,
             onBindView = { holder, position ->
                 val subcategory = data[position]
