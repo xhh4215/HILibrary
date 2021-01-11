@@ -1,7 +1,6 @@
 package com.example.asproj.fragment.category
 
 import android.graphics.Color
-import android.media.Image
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.SparseIntArray
