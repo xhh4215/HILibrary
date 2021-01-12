@@ -11,11 +11,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import androidx.recyclerview.widget.GridLayoutManager
+import com.alibaba.android.arouter.launcher.ARouter
 import com.example.asproj.R
 import com.example.asproj.http.api.ApiFactory
 import com.example.asproj.http.api.categoryapi.CategoryApi
 import com.example.asproj.http.model.Subcategory
 import com.example.asproj.http.model.TabCategory
+import com.example.asproj.rote.HiRoute
 import com.example.common.ui.component.HiBaseFragment
 import com.example.common.ui.view.EmptyView
 import com.example.common.ui.view.loadUrl
@@ -173,8 +175,14 @@ class CategoryFragment : HiBaseFragment() {
                     subcategory.subcategoryName
             },
             onItemCLickListener = { holder, position ->
+                val subcategoryId = data[position]
                 // 是应该跳转到类目的商品列表页
-                Toast.makeText(context, "you touch me${position}", Toast.LENGTH_SHORT).show()
+                val bundle = Bundle()
+                bundle.putString("categoryId",subcategoryId.categoryId)
+                bundle.putString("categoryTitle",subcategoryId.subcategoryName)
+                bundle.putString("subcategoryId",subcategoryId.subcategoryId)
+                HiRoute.startActivity(context!!,bundle,HiRoute.Destination.GOODS_LIST)
+
             })
     }
 

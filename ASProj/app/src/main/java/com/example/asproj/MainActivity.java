@@ -4,17 +4,13 @@ package com.example.asproj;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.asproj.biz.LoginActivity;
-
 import com.example.asproj.logic.MainActivityLogic;
 import com.example.asproj.logic.MainActivityLogic.ActivityProvider;
-import com.example.common.manager.ActivityManager;
 import com.example.common.ui.component.HiBaseActivity;
 import com.example.hi_library.utils.HiStatusBarUtil;
 

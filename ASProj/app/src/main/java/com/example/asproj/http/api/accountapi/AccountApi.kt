@@ -7,6 +7,11 @@ import com.example.hi_library.restful.annotation.GET
 import com.example.hi_library.restful.annotation.POST
 import com.example.hi_library.restful.callback.HiCall
 
+/***
+ * @author 栾桂明
+ * @description 关于账户相关的API的定义
+ * @date 2020年 1月12日
+ */
 interface AccountApi {
     /***
      * 登录
@@ -38,6 +43,6 @@ interface AccountApi {
      * 通知
      */
     @GET("notice")
-    fun notice():HiCall<CourseNotice>
+    fun notice(): HiCall<CourseNotice>
 
 }

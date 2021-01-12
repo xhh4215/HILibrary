@@ -34,4 +34,6 @@ data class GoodsModel(
     val tags:String
 )
 
+data class GoodsList(val total:Int,val list:List<GoodsModel>)
+
 data class SliderImage(val type:Int,val url:String)

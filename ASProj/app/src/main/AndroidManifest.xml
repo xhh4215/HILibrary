@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ASProj"
         android:usesCleartextTraffic="true">
-        <activity android:name=".TestActivity"></activity>
+
         <activity android:name=".rote.DegradeGlobalActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -22,8 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".biz.LoginActivity"></activity>
-        <activity android:name=".biz.RegisterActivity" />
+        <activity android:name=".biz.account.LoginActivity" />
+        <activity android:name=".biz.account.RegisterActivity" />
+        <activity android:name=".biz.goods.GoodsListActivity"/>
     </application>
 
 </manifest>

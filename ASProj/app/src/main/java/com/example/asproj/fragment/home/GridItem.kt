@@ -2,6 +2,7 @@ package com.example.asproj.fragment.home
 
 import android.content.Context
 import android.graphics.Color
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asproj.R
 import com.example.asproj.http.model.Subcategory
- import com.example.common.ui.view.loadUrl
+import com.example.asproj.rote.HiRoute
+import com.example.common.ui.view.loadUrl
 import com.example.hi_library.utils.HiDisplayUtil
 import com.example.hi_ui.ui.dataitem.HiDataItem
 import com.example.hi_ui.ui.dataitem.HiViewHolder
@@ -58,6 +60,12 @@ class GridItem(val list: List<Subcategory>) :
             holder.item_image.loadUrl(subcategory.subcategoryIcon)
             holder.item_title.text = subcategory.subcategoryName
             holder.itemView.setOnClickListener {
+                // 是应该跳转到类目的商品列表页
+                val bundle = Bundle()
+                bundle.putString("categoryId",subcategory.categoryId)
+                bundle.putString("categoryTitle",subcategory.subcategoryName)
+                bundle.putString("subcategoryId",subcategory.subcategoryId)
+                HiRoute.startActivity(context,bundle, HiRoute.Destination.GOODS_LIST)
 
             }
         }
