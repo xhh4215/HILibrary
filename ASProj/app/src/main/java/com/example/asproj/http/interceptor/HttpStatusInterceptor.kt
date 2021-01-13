@@ -1,7 +1,9 @@
 package com.example.asproj.http.interceptor
 
+import android.os.Bundle
 import android.util.Log
 import com.alibaba.android.arouter.launcher.ARouter
+import com.example.asproj.rote.HiRoute
 import com.example.hi_library.restful.HiResponse
 import com.example.hi_library.restful.interceptor.HiInterceptor
 
@@ -17,18 +19,18 @@ class HttpStatusInterceptor : HiInterceptor {
         if (!chain.isRequestPeriod && response != null) {
             when (response.code) {
                 HiResponse.RC_NEED_LOGIN -> {
-                    ARouter.getInstance().build("/account/login").navigation()
+                    HiRoute.startActivity(null,destination = HiRoute.Destination.ACCOUNT_LOGIN)
                 }
                 HiResponse.RC_AUTH_TOKEN_EXPIRED, (HiResponse.RC_AUTH_TOKEN_INVALID), (HiResponse.RC_USER_FORBID) -> {
                     var helpUrl: String? = null
                     if (response.errorData != null) {
                         helpUrl = response.errorData!!["helpUr;"]
                     }
-                    ARouter.getInstance().build("/degrade/global/activity")
-                        .withString("degrade_title", "非法访问")
-                        .withString("degrade_desc", response.msg)
-                        .withString("degrade_action", helpUrl)
-                        .navigation()
+                    val bundle = Bundle()
+                    bundle.putString("degrade_title","非法访问")
+                    bundle.putString("degrade_desc",response.msg)
+                    bundle.putString("degrade_action",helpUrl)
+                    HiRoute.startActivity(null,bundle,HiRoute.Destination.DEGRADE_GLOBAL)
 
 
                 }

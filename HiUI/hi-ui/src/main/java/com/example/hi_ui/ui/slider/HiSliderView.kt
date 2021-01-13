@@ -134,50 +134,56 @@ class HiSliderView @JvmOverloads constructor(
     }
 
 
-    inner class ContentAdapter(
-        val layoutRes: Int
-    ) : RecyclerView.Adapter<HiViewHolder>() {
+    inner class ContentAdapter(val layoutRes: Int) : RecyclerView.Adapter<HiViewHolder>() {
+        private lateinit var onItemClick: (HiViewHolder, Int) -> Unit
         private lateinit var onBindView: (HiViewHolder, Int) -> Unit
-        private lateinit var onItemCLickListener: (HiViewHolder, Int) -> Unit
         private var count: Int = 0
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HiViewHolder {
             val itemView = LayoutInflater.from(context).inflate(layoutRes, parent, false)
-            val remainSize = width - paddingRight - paddingLeft - menuItemAttr.width
-            val layoutManager = (parent as RecyclerView).layoutManager
-            var spanCount = 0
-            when (layoutManager) {
-                is GridLayoutManager -> {
-                    spanCount = layoutManager.spanCount
-                }
-                is StaggeredGridLayoutManager -> {
-                    spanCount = layoutManager.spanCount
-                }
-            }
-            if (spanCount>0){
-                val itemWidth = remainSize/spanCount
-                itemView.layoutParams = RecyclerView.LayoutParams(itemWidth,itemWidth)
-            }
             return HiViewHolder(itemView)
         }
 
-        override fun getItemCount() = count
+        override fun getItemCount(): Int {
+            return count
+        }
 
         override fun onBindViewHolder(holder: HiViewHolder, position: Int) {
             onBindView(holder, position)
             holder.itemView.setOnClickListener {
-                onItemCLickListener(holder, position)
+                onItemClick(holder, position)
+            }
+        }
+
+        override fun onViewAttachedToWindow(holder: HiViewHolder) {
+            super.onViewAttachedToWindow(holder)
+            val remainSpace = width - paddingLeft - paddingRight - menuItemAttr.width
+            val layoutManager = contentView.layoutManager
+            var spanCount = 0
+            if (layoutManager is GridLayoutManager) {
+                spanCount = layoutManager.spanCount
+            } else if (layoutManager is StaggeredGridLayoutManager) {
+                spanCount = layoutManager.spanCount
+            }
+
+            if (spanCount > 0) {
+                val itemWidth = remainSpace / spanCount
+                //创建content itemview  ，设置它的layoutparams 的原因，是防止图片未加载出来之前，列表滑动时 上下闪动的效果
+                val layoutParams = holder.itemView.layoutParams
+                layoutParams.width = itemWidth
+                layoutParams.height = itemWidth
+                holder.itemView.layoutParams = layoutParams
             }
         }
 
         fun update(
             itemCount: Int,
             onBindView: (HiViewHolder, Int) -> Unit,
-            onItemCLickListener: (HiViewHolder, Int) -> Unit
+            onItemClick: (HiViewHolder, Int) -> Unit
         ) {
             this.count = itemCount
             this.onBindView = onBindView
-            this.onItemCLickListener = onItemCLickListener
+            this.onItemClick = onItemClick
         }
 
     }

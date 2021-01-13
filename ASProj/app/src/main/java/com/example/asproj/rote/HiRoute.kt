@@ -15,7 +15,9 @@ object HiRoute {
     enum class Destination(val path: String) {
         GOODS_LIST("/goods/list"),
         ACCOUNT_REGISTER("/account/registration"),
-        ACCOUNT_LOGIN("/account/login")
+        ACCOUNT_LOGIN("/account/login"),
+        DEGRADE_GLOBAL( "/degrade/global/activity")
+
     }
 
     /***
@@ -34,7 +36,7 @@ object HiRoute {
      * 使用Aroute实现界面的跳转 携带参数
      */
     fun startActivity(
-        context: Context,
+        context: Context?,
         bundle: Bundle,
         destination: Destination,
         requestCode: Int = -1
@@ -50,7 +52,7 @@ object HiRoute {
 
 
     fun startActivity(
-        context: Context,
+        context: Context?,
         destination: Destination,
         requestCode: Int = -1
     ) {

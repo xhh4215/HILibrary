@@ -4,9 +4,11 @@ package com.example.asproj;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.asproj.logic.MainActivityLogic;
@@ -14,6 +16,7 @@ import com.example.asproj.logic.MainActivityLogic.ActivityProvider;
 import com.example.common.ui.component.HiBaseActivity;
 import com.example.hi_library.utils.HiStatusBarUtil;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class MainActivity extends HiBaseActivity implements ActivityProvider {
@@ -24,8 +27,8 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         activityLogic = new MainActivityLogic(this, savedInstanceState);
-        HiStatusBarUtil.INSTANCE.setStatusBar(this,true, Color.WHITE,false);
-     }
+        HiStatusBarUtil.INSTANCE.setStatusBar(this, true, Color.WHITE, false);
+    }
 
     /***
      * 执行的时机
@@ -41,13 +44,37 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
         activityLogic.onSaveInstanceState(outState);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+            //点击了音量下键
+            if (BuildConfig.DEBUG) {
+                try {
+                    Class<?> clazz = Class.forName("com.example.hi_debugtool.DebugToolDialogFragment");
+                    DialogFragment target = (DialogFragment) clazz.getConstructor().newInstance();
+                    target.show(getSupportFragmentManager(),"debug_tool");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
         for (Fragment fragment : fragments) {
-               fragment.onActivityResult(requestCode,resultCode,data);
+            fragment.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

@@ -27,9 +27,9 @@ object SPUtil {
 
     }
 
-    fun getBoolean(key: String): Boolean? {
+    fun getBoolean(key: String): Boolean {
         val shared = getShared()
-        return shared?.getBoolean(key, false)
+        return shared?.getBoolean(key, false)?:false
     }
 
     fun putInt( key: String, value: Int) {

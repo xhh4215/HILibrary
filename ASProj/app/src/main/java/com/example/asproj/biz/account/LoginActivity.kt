@@ -8,8 +8,7 @@ import android.text.TextUtils
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
-import com.example.asproj.R
+ import com.example.asproj.R
 import com.example.asproj.databinding.ActivityLoginBinding
 import com.example.asproj.http.api.accountapi.AccountApi
 import com.example.asproj.http.api.ApiFactory
@@ -34,6 +33,7 @@ class LoginActivity : HiBaseActivity() {
     //注册结果的request_code
     companion object {
         const val REGISTER_ACTIVITY_CODE = 12
+
     }
 
     /***
