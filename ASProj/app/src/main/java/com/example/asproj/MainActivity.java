@@ -46,7 +46,7 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
             //点击了音量下键
             if (BuildConfig.DEBUG) {
                 try {
