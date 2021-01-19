@@ -4,20 +4,27 @@ package com.example.asproj;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.example.asproj.logic.MainActivityLogic;
 import com.example.asproj.logic.MainActivityLogic.ActivityProvider;
 import com.example.common.ui.component.HiBaseActivity;
+import com.example.hi_library.utils.HiDataBus;
 import com.example.hi_library.utils.HiStatusBarUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 public class MainActivity extends HiBaseActivity implements ActivityProvider {
     private MainActivityLogic activityLogic;
@@ -28,6 +35,7 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
         setContentView(R.layout.activity_main);
         activityLogic = new MainActivityLogic(this, savedInstanceState);
         HiStatusBarUtil.INSTANCE.setStatusBar(this, true, Color.WHITE, false);
+        HiDataBus.INSTANCE.<String>with("stickyValue").setStickyData("stickyValue from Mainactivity");
     }
 
     /***
@@ -45,6 +53,17 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        getLifecycle().addObserver(new LifecycleEventObserver() {
+            @Override
+            public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
+                Log.d("event", event.name());
+            }
+        });
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
             //点击了音量下键
@@ -52,7 +71,7 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
                 try {
                     Class<?> clazz = Class.forName("com.example.hi_debugtool.DebugToolDialogFragment");
                     DialogFragment target = (DialogFragment) clazz.getConstructor().newInstance();
-                    target.show(getSupportFragmentManager(),"debug_tool");
+                    target.show(getSupportFragmentManager(), "debug_tool");
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 } catch (NoSuchMethodException e) {

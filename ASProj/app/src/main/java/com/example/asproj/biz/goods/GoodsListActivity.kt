@@ -2,11 +2,14 @@ package com.example.asproj.biz.goods
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.asproj.R
 import com.example.asproj.rote.HiRoute
 import com.example.common.ui.component.HiBaseActivity
+import com.example.hi_library.utils.HiDataBus
 import com.example.hi_library.utils.HiStatusBarUtil
 import kotlinx.android.synthetic.main.activity_goods_list.*
 
@@ -54,8 +57,14 @@ class GoodsListActivity : HiBaseActivity() {
         if (!fragment.isAdded) {
             // 添加Fragment同时添加tag
             transaction.add(R.id.category_container, fragment, GOODS_LIST_TAG)
-            transaction.show(fragment).commitAllowingStateLoss()
-
         }
+        transaction.show(fragment).commitAllowingStateLoss()
+        HiDataBus.with<String>("stickyValue").observerSticky(this, false, Observer {
+            Toast.makeText(
+                GoodsListFragment@ this.applicationContext,
+                "value is $it",
+                Toast.LENGTH_SHORT
+            ).show()
+        })
     }
 }
