@@ -59,12 +59,5 @@ class GoodsListActivity : HiBaseActivity() {
             transaction.add(R.id.category_container, fragment, GOODS_LIST_TAG)
         }
         transaction.show(fragment).commitAllowingStateLoss()
-        HiDataBus.with<String>("stickyValue").observerSticky(this, false, Observer {
-            Toast.makeText(
-                GoodsListFragment@ this.applicationContext,
-                "value is $it",
-                Toast.LENGTH_SHORT
-            ).show()
-        })
     }
 }

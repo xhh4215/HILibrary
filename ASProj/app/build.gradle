@@ -58,7 +58,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.21"
     implementation "androidx.core:core-ktx:$ktx_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "com.google.android.material:material:$material_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -67,7 +66,7 @@ dependencies {
     implementation project(path: ':common')
     implementation project(path: ':hilibrary')
     implementation project(path: ':hiui')
-    debugImplementation project(path: ':hi-debugtool')
+    debugImplementation project(path: ':hidebugtool')
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

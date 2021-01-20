@@ -35,7 +35,6 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
         setContentView(R.layout.activity_main);
         activityLogic = new MainActivityLogic(this, savedInstanceState);
         HiStatusBarUtil.INSTANCE.setStatusBar(this, true, Color.WHITE, false);
-        HiDataBus.INSTANCE.<String>with("stickyValue").setStickyData("stickyValue from Mainactivity");
     }
 
     /***
