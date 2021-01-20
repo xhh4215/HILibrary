@@ -13,7 +13,7 @@ interface CacheDao {
     /***
      * 插入缓存数据
      */
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(entity = Cache::class, onConflict = OnConflictStrategy.REPLACE)
     fun saveCache(cache: Cache): Long
 
     /***
@@ -25,6 +25,6 @@ interface CacheDao {
     /***
      * 删除缓存数据
      */
-    @Delete
+    @Delete(entity = Cache::class)
     fun deleteSave(cache: Cache)
 }

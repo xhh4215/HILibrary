@@ -35,7 +35,9 @@ object HiStorage {
     /***
      * 删除缓存中的数据
      */
-    fun deleteCache(cache: Cache) {
+    fun deleteCache(key: String) {
+        val cache = Cache()
+        cache.key = key
         CacheDatabase.get().cacheDao.deleteSave(cache)
     }
 
