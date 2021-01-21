@@ -11,7 +11,7 @@ import com.example.hi_library.utils.AppGlobals
  * @date 2020年1月20日
  * @desc  创建数据库的具体的操作
  */
-@Database(entities = [Cache::class], version = 1)
+@Database(entities = [Cache::class], version = 1,exportSchema = false)
 abstract class CacheDatabase : RoomDatabase() {
     //操作数据的dao对象
     abstract val cacheDao: CacheDao

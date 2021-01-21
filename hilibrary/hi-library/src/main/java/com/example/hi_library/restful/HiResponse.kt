@@ -1,8 +1,11 @@
 package com.example.hi_library.restful
 
+import com.example.hi_library.restful.annotation.CacheStrategy
+
 open class HiResponse<T> {
     companion object {
         const val SUCCESS: Int = 0
+        const val CACHE_SUCCESS: Int = 304
 
         //有错误
         const val RC_HAS_ERROR = 5000
@@ -41,20 +44,22 @@ open class HiResponse<T> {
         const val RC_AUTH_TOKEN_INVALID = 4031
     }
 
-        //原始数据
-        var rawData: String? = null
+    //原始数据
+    var rawData: String? = null
 
-        //业务状态码
-        var code = 0
+    //业务状态码
+    var code = 0
 
-        //业务数据
-        var data: T? = null
+    //业务数据
+    var data: T? = null
 
-        //错误状态下的数据
-        var errorData: Map<String, String>? = null
+    //错误状态下的数据
+    var errorData: Map<String, String>? = null
 
-        // 错误信息
-        var msg: String? = null
+    // 错误信息
+    var msg: String? = null
 
-    fun successfull() = code== SUCCESS
+    fun successfull(): Boolean {
+        return code == SUCCESS || code == CACHE_SUCCESS
     }
+}

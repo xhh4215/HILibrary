@@ -2,9 +2,7 @@ package com.example.asproj.fragment.home
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
-import android.view.View
-import android.widget.Toast
+ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asproj.http.api.ApiFactory
@@ -12,6 +10,10 @@ import com.example.asproj.http.api.homeapi.HomeApi
 import com.example.asproj.http.model.HomeModel
 import com.example.common.ui.component.HiAbsListFragment
 import com.example.hi_library.restful.HiResponse
+import com.example.hi_library.restful.annotation.CacheStrategy
+import com.example.hi_library.restful.annotation.CacheStrategy.Companion.CACHE_FIRST
+import com.example.hi_library.restful.annotation.CacheStrategy.Companion.NET_CACHE
+import com.example.hi_library.restful.annotation.CacheStrategy.Companion.NET_ONLY
 import com.example.hi_library.restful.callback.HiCallBack
 import com.example.hi_ui.ui.dataitem.HiDataItem
 
@@ -34,9 +36,9 @@ class HomeTabFragment : HiAbsListFragment() {
         categoryId = arguments?.getString("categoryId", DEFAULT_HOT_TAB_CATEGORY_ID)
 
         super.onViewCreated(view, savedInstanceState)
-        queryTabCategoryList()
+        queryTabCategoryList(CACHE_FIRST)
         enableLoadMore {
-            queryTabCategoryList()
+            queryTabCategoryList(NET_ONLY)
         }
     }
 
@@ -51,12 +53,12 @@ class HomeTabFragment : HiAbsListFragment() {
      */
     override fun onRefresh() {
         super.onRefresh()
-        queryTabCategoryList()
+        queryTabCategoryList(NET_CACHE)
     }
 
 
-    private fun queryTabCategoryList() {
-        ApiFactory.create(HomeApi::class.java).queryTabCategoryList(categoryId!!, pageIndex, 10)
+    private fun queryTabCategoryList(cacheStrategy: Int) {
+        ApiFactory.create(HomeApi::class.java).queryTabCategoryList(cacheStrategy,categoryId!!, pageIndex, 10)
             .enqueue(object : HiCallBack<HomeModel> {
                 override fun onSuccess(response: HiResponse<HomeModel>) {
                     if (response.successfull() && response.data != null) {

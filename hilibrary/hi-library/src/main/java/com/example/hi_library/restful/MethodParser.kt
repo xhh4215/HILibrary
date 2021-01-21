@@ -11,8 +11,9 @@ class MethodParser(
     val baseUrl: String,
     method: Method
 ) {
-    private   var replaceRelativeUrl: String?=null
+    private var replaceRelativeUrl: String? = null
     private var domainUrl: String? = null
+    private var cacheStrategy: Int = CacheStrategy.NET_ONLY
     private var fromPost = true
     private var httpMethod: Int = 0
     private lateinit var relativeUrl: String
@@ -85,8 +86,11 @@ class MethodParser(
                     //要不替换的相对路径中的String
                     val replaceName = annotation.value
                     val replacement = value.toString()
-                     replaceRelativeUrl = relativeUrl.replace("{$replaceName}", replacement)
+                    replaceRelativeUrl = relativeUrl.replace("{$replaceName}", replacement)
 
+                }
+                is CacheStrategy -> {
+                    cacheStrategy = value as Int
                 }
                 else -> {
                     throw  IllegalStateException("can not handle parameter annotation${annotation.javaClass.toString()} ")
@@ -160,6 +164,9 @@ class MethodParser(
                     domainUrl = annotation.value
 
                 }
+                is CacheStrategy -> {
+                    cacheStrategy = annotation.value
+                }
                 else -> {
                     throw IllegalStateException(String.format("cannot handler method annotation${annotation.javaClass.toString()}"))
                 }
@@ -185,8 +192,9 @@ class MethodParser(
         request.httpMethod = httpMethod
         request.parameters = parameters
         request.returnType = returnType
-        request.relativeUrl =replaceRelativeUrl?:relativeUrl
+        request.relativeUrl = replaceRelativeUrl ?: relativeUrl
         request.formPost = fromPost
+        request. cacheStrategy= cacheStrategy
         return request
     }
 

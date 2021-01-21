@@ -2,6 +2,7 @@ package com.example.asproj.http.api.homeapi
 
 import com.example.asproj.http.model.HomeModel
 import com.example.asproj.http.model.TabCategory
+import com.example.hi_library.restful.annotation.CacheStrategy
 import com.example.hi_library.restful.annotation.Field
 import com.example.hi_library.restful.annotation.GET
 import com.example.hi_library.restful.annotation.Path
@@ -15,11 +16,14 @@ interface HomeApi {
     /***
      * 获取所有的category列表
      */
+    @CacheStrategy(CacheStrategy.CACHE_FIRST)
     @GET("category/categories")
     fun queryTabList(): HiCall<List<TabCategory>>
 
+
     @GET("home/{categoryId}")
     fun queryTabCategoryList(
+        @CacheStrategy cacheStrategy: Int,
         @Path("categoryId") categoryId: String,
         @Field("pageIndex") pageIndex: Int,
         @Field("pageSize") pageSize: Int
