@@ -1,12 +1,10 @@
 package com.example.asproj.fragment.home
 
-import android.graphics.pdf.PdfDocument
-import android.os.Bundle
+ import android.os.Bundle
 import android.util.Log
 import android.util.SparseArray
 import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContextCompat
+ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter

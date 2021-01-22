@@ -16,7 +16,8 @@ object HiRoute {
         GOODS_LIST("/goods/list"),
         ACCOUNT_REGISTER("/account/registration"),
         ACCOUNT_LOGIN("/account/login"),
-        DEGRADE_GLOBAL( "/degrade/global/activity")
+        DEGRADE_GLOBAL("/degrade/global/activity"),
+        DETAIL_MAIN("/detail/main")
 
     }
 

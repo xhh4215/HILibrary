@@ -108,7 +108,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
      * item：添加的item
      * notify：是否进行刷新
      */
-    fun addItemAt(index: Int, dataItem: HiDataItem<*, ViewHolder>, notify: Boolean) {
+    fun addItemAt(index: Int,  dataItem: HiDataItem<*, out ViewHolder>, notify: Boolean) {
         if (index > 0) {
             dataSets.add(index, dataItem)
         } else {

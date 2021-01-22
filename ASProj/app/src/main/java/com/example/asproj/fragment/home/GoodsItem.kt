@@ -1,6 +1,7 @@
 package com.example.asproj.fragment.home
 
 import android.content.Context
+import android.os.Bundle
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asproj.R
 import com.example.asproj.http.model.GoodsModel
+import com.example.asproj.rote.HiRoute
 import com.example.common.ui.view.loadUrl
 import com.example.hi_library.utils.HiDisplayUtil
 import com.example.hi_ui.ui.dataitem.HiDataItem
@@ -67,6 +69,12 @@ class GoodsItem(val goodsModel: GoodsModel, val hotTab: Boolean) :
                 params.leftMargin = margin
             }
             holder.itemView.layoutParams = params
+        }
+        holder.itemView.setOnClickListener {
+            val bundle =Bundle()
+            bundle.putString("goodId",goodsModel.goodsId)
+            bundle.putParcelable("goodModel",goodsModel)
+            HiRoute.startActivity(context,bundle,HiRoute.Destination.DETAIL_MAIN)
         }
     }
 

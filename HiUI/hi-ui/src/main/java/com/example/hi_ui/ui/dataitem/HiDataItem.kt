@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class HiDataItem<Data, VH : RecyclerView.ViewHolder>(val data: Data?) {
+abstract class HiDataItem<Data, VH : RecyclerView.ViewHolder>(val data: Data?=null) {
     var hiAdapter: HiAdapter? = null
     var mData: Data? = null
     fun setAdapter(adapter: HiAdapter) {

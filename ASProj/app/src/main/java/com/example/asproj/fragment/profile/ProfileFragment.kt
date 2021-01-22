@@ -14,8 +14,10 @@ import android.text.style.StyleSpan
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.asproj.R
+import com.example.asproj.biz.account.AccountManager
 import com.example.asproj.http.api.accountapi.AccountApi
 import com.example.asproj.http.api.ApiFactory
 import com.example.asproj.http.model.CourseNotice
@@ -35,7 +37,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 class ProfileFragment : HiBaseFragment() {
     private val REQUEST_CODE_LOGIN_PROFILE = 1001
 
-     private val ITEM_PLACE_HOLDER = "   "
+    private val ITEM_PLACE_HOLDER = "   "
     override fun getLayoutId(): Int {
         return R.layout.fragment_profile
     }
@@ -70,22 +72,13 @@ class ProfileFragment : HiBaseFragment() {
      * 查询登录的用户信息
      */
     private fun queryLoginUserData() {
-        ApiFactory.create(AccountApi::class.java).profile()
-            .enqueue(object : HiCallBack<UserProfile> {
-                override fun onSuccess(response: HiResponse<UserProfile>) {
-                    val userProfile = response.data
-                    if (response.code == HiResponse.SUCCESS && userProfile != null) {
-                        updateUI(userProfile)
-                    } else {
-                        showToast(response.msg)
-                    }
-                }
-
-                override fun onFailed(throwable: Throwable) {
-                    showToast(throwable.message)
-                }
-
-            })
+        AccountManager.getUserProfile(this, Observer { profile ->
+            if (profile != null) {
+                updateUI(profile)
+            } else {
+                showToast(getString(R.string.fetch_user_profile_fail))
+            }
+        }, false)
     }
 
     /***
@@ -137,8 +130,9 @@ class ProfileFragment : HiBaseFragment() {
         } else {
             user_avatar.setImageResource(R.drawable.ic_avatar_default)
             user_avatar.setOnClickListener {
-                ARouter.getInstance().build("/account/login")
-                    .navigation(activity, REQUEST_CODE_LOGIN_PROFILE)
+                AccountManager.login(context, Observer { success ->
+                    queryLoginUserData()
+                })
             }
         }
         tab_item_history.text =
@@ -191,17 +185,6 @@ class ProfileFragment : HiBaseFragment() {
         ssb.append(ssTop)
         ssb.append(bottomText)
         return ssb
-    }
-
-    /***
-     * 登录成功数据的刷新
-     */
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_LOGIN_PROFILE && resultCode == Activity.RESULT_OK && data != null) {
-            queryLoginUserData()
-        }
-
     }
 
 }

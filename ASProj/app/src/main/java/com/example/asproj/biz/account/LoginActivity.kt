@@ -8,7 +8,7 @@ import android.text.TextUtils
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.alibaba.android.arouter.facade.annotation.Route
- import com.example.asproj.R
+import com.example.asproj.R
 import com.example.asproj.databinding.ActivityLoginBinding
 import com.example.asproj.http.api.accountapi.AccountApi
 import com.example.asproj.http.api.ApiFactory
@@ -79,8 +79,7 @@ class LoginActivity : HiBaseActivity() {
                     if (response.code == HiResponse.SUCCESS) {
                         //usermanager
                         val data = response.data
-                        SPUtil.putString("boarding-pass", data!!)
-                        setResult(Activity.RESULT_OK, Intent())
+                        AccountManager.loginSuccess(data!!)
                         finish()
                     } else {
                         showToast(getString(R.string.login_fail) + "${response.msg}")
