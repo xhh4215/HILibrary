@@ -98,6 +98,9 @@ class DetailActivity : HiBaseActivity() {
                 detailModel.goodsName
             )
         )
+        dataItems.add(
+            CommentItem(detailModel)
+        )
         hiAdapter.clearItems()
         hiAdapter.addItems(dataItems, true)
     }
