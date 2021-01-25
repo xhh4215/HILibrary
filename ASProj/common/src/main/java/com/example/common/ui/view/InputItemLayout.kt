@@ -20,7 +20,7 @@ import com.example.common.R
 
 open class InputItemLayout : LinearLayout {
     lateinit var editText: EditText
-    private lateinit var titleTextView: TextView
+    public lateinit var titleTextView: TextView
     private var bottomLine: Line
     private var topLine: Line
     private var topPaint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -113,6 +113,7 @@ open class InputItemLayout : LinearLayout {
             applyUnit(TypedValue.COMPLEX_UNIT_SP, 14f)
         )
         editText = EditText(context)
+        editText.setPadding(0,0,0,0)
         val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
         params.weight = 1f
          editText.layoutParams = params

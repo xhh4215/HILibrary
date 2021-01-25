@@ -31,9 +31,10 @@
         android:id="@+id/chip_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_6"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_16"
+        android:visibility="gone"
         app:chipSpacingHorizontal="@dimen/dp_10"
         app:singleLine="false"></com.google.android.material.chip.ChipGroup>
 
@@ -42,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginRight="@dimen/dp_16"
         android:orientation="vertical">
 

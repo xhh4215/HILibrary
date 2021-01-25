@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asproj.R
 import com.example.asproj.http.model.GoodsModel
+import com.example.asproj.http.model.selectPrice
 import com.example.asproj.rote.HiRoute
 import com.example.common.ui.view.loadUrl
 import com.example.hi_library.utils.HiDisplayUtil
@@ -26,12 +27,12 @@ open class GoodsItem(val goodsModel: GoodsModel, val hotTab: Boolean) :
 
         holder.item_image.loadUrl(goodsModel.sliderImage)
         holder.item_title.text = goodsModel.goodsName
-        holder.item_price.text = goodsModel.marketPrice
+        holder.item_price.text = selectPrice(goodsModel.groupPrice,goodsModel.marketPrice)
         holder.item_sale_desc.text = goodsModel.completedNumText
         val itemLabelContainer = holder.item_label_container
-        itemLabelContainer.visibility = View.VISIBLE
         if (itemLabelContainer != null) {
             if (!TextUtils.isEmpty(goodsModel.tags)) {
+                itemLabelContainer.visibility = View.VISIBLE
                 val split = goodsModel.tags.split(" ")
                 for (index in split.indices) {
                     val childCount = itemLabelContainer.childCount

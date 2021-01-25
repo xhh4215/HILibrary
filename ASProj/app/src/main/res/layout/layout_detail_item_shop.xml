@@ -17,6 +17,8 @@
             android:id="@+id/shop_logo"
             android:layout_width="@dimen/dp_60"
             android:layout_height="@dimen/dp_60"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

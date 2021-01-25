@@ -59,6 +59,7 @@
         android:layout_marginLeft="@dimen/dp_10"
         android:textColor="@color/color_9b9"
         android:textSize="@dimen/sp_12"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/item_price"
          app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="@dimen/dp_10"
