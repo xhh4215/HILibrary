@@ -55,6 +55,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
             notifyItemInserted(headers.size() - 1)
         }
     }
+
     /***
      * 删除headerView
      */
@@ -70,12 +71,11 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
      * 添加footerView
      */
     fun addFooterView(view: View) {
-         if (footers.indexOfValue(view) < 0) {
+        if (footers.indexOfValue(view) < 0) {
             footers.put(BASE_ITEM_TYPE_FOOTER++, view)
             notifyItemInserted(itemCount)
         }
     }
-
 
 
     /***
@@ -108,7 +108,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
      * item：添加的item
      * notify：是否进行刷新
      */
-    fun addItemAt(index: Int,  dataItem: HiDataItem<*, out ViewHolder>, notify: Boolean) {
+    fun addItemAt(index: Int, dataItem: HiDataItem<*, out ViewHolder>, notify: Boolean) {
         if (index > 0) {
             dataSets.add(index, dataItem)
         } else {
@@ -172,7 +172,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
             return headers.keyAt(position)
         }
         if (isFooterPosition(position)) {
-             //footer的位置要计算
+            //footer的位置要计算
             val footerPosition = position - getHeaderSize() - getOriginalItemSize()
             return footers.keyAt(footerPosition)
         }
@@ -184,21 +184,21 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):  ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         if (headers.indexOfKey(viewType) >= 0) {
             val view = headers[viewType]
-            return object : RecyclerView.ViewHolder(view){}
+            return object : RecyclerView.ViewHolder(view) {}
         }
         if (footers.indexOfKey(viewType) >= 0) {
             val view = footers[viewType]
-            return object : RecyclerView.ViewHolder(view){}
+            return object : RecyclerView.ViewHolder(view) {}
         }
 
         //这会导致不同position，但viewType相同，获取到的dataItem始终是第一次关联的dataItem对象。
         //这就会导致通过getItemView创建的成员变量，只在第一个dataItem中，其它实例中无法生效
         //为了解决dataItem成员变量binding, 刷新之后无法被复用的问题
         val position = typePosition.get(viewType)
-         val dataItem = dataSets[position]
+        val dataItem = dataSets[position]
         val vh = dataItem.onCreateViewHolder(parent)
         if (vh != null) return vh
         var view: View? = dataItem.getItemView(parent)
@@ -255,6 +255,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
         }
         return object : HiViewHolder(view) {}
     }
+
     /***
      * 是否是Footer位置
      */
@@ -273,8 +274,8 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
     /***
      * 获取列表中的item的个数
      */
-    override fun getItemCount():Int{
-       return  dataSets.size + getFooterSize() + getHeaderSize()
+    override fun getItemCount(): Int {
+        return dataSets.size + getFooterSize() + getHeaderSize()
     }
 
     fun getItem(position: Int): HiDataItem<*, ViewHolder>? {
@@ -289,6 +290,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<ViewHolder>() {
      */
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
+        recyclerViewRef = WeakReference(recyclerView)
         val layoutManager = recyclerView.layoutManager
         if (layoutManager is GridLayoutManager) {
             //Returns the number of spans laid out by this grid.

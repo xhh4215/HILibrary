@@ -17,11 +17,8 @@ import com.example.hi_library.utils.HiDisplayUtil
 import com.example.hi_ui.ui.dataitem.HiDataItem
 import com.example.hi_ui.ui.dataitem.HiViewHolder
 import kotlinx.android.synthetic.main.layout_home_goods_list_item1.*
-import kotlinx.android.synthetic.main.layout_home_goods_list_item1.view.*
-import kotlinx.android.synthetic.main.layout_home_operation_grid_item.view.item_image
-import kotlinx.android.synthetic.main.layout_home_operation_grid_item.view.item_title
 
-class GoodsItem(val goodsModel: GoodsModel, val hotTab: Boolean) :
+open class GoodsItem(val goodsModel: GoodsModel, val hotTab: Boolean) :
     HiDataItem<GoodsModel, HiViewHolder>(goodsModel) {
     val MAX_TAG_SIZE = 3
     override fun onBindData(holder: HiViewHolder, position: Int) {
@@ -32,30 +29,31 @@ class GoodsItem(val goodsModel: GoodsModel, val hotTab: Boolean) :
         holder.item_price.text = goodsModel.marketPrice
         holder.item_sale_desc.text = goodsModel.completedNumText
         val itemLabelContainer = holder.item_label_container
-        if (!TextUtils.isEmpty(goodsModel.tags)) {
-            itemLabelContainer.visibility = View.VISIBLE
-            val split = goodsModel.tags.split(" ")
-
-            for (index in split.indices) {
-                val childCount = itemLabelContainer.childCount
-                if (index > MAX_TAG_SIZE - 1) {
-                    for (index in childCount - 1 downTo MAX_TAG_SIZE - 1) {
-                        itemLabelContainer.removeViewAt(index)
+        itemLabelContainer.visibility = View.VISIBLE
+        if (itemLabelContainer != null) {
+            if (!TextUtils.isEmpty(goodsModel.tags)) {
+                val split = goodsModel.tags.split(" ")
+                for (index in split.indices) {
+                    val childCount = itemLabelContainer.childCount
+                    if (index > MAX_TAG_SIZE - 1) {
+                        for (index in childCount - 1 downTo MAX_TAG_SIZE - 1) {
+                            itemLabelContainer.removeViewAt(index)
+                        }
+                        break
                     }
-                    break
-                }
-                val labelView: TextView = if (index > childCount - 1) {
-                    val view = createLabelView(context, index != 0)
-                    itemLabelContainer.addView(view)
-                    view
-                } else {
-                    itemLabelContainer.getChildAt(index) as TextView
-                }
+                    val labelView: TextView = if (index > childCount - 1) {
+                        val view = createLabelView(context, index != 0)
+                        itemLabelContainer.addView(view)
+                        view
+                    } else {
+                        itemLabelContainer.getChildAt(index) as TextView
+                    }
 
-                labelView.text = split[index]
+                    labelView.text = split[index]
+                }
+            } else {
+                itemLabelContainer.visibility = View.GONE
             }
-        } else {
-            itemLabelContainer.visibility = View.GONE
         }
         if (!hotTab) {
             val margin = HiDisplayUtil.dp2px(2f)
@@ -71,10 +69,10 @@ class GoodsItem(val goodsModel: GoodsModel, val hotTab: Boolean) :
             holder.itemView.layoutParams = params
         }
         holder.itemView.setOnClickListener {
-            val bundle =Bundle()
-            bundle.putString("goodId",goodsModel.goodsId)
-            bundle.putParcelable("goodModel",goodsModel)
-            HiRoute.startActivity(context,bundle,HiRoute.Destination.DETAIL_MAIN)
+            val bundle = Bundle()
+            bundle.putString("goodId", goodsModel.goodsId)
+            bundle.putParcelable("goodModel", goodsModel)
+            HiRoute.startActivity(context, bundle, HiRoute.Destination.DETAIL_MAIN)
         }
     }
 
