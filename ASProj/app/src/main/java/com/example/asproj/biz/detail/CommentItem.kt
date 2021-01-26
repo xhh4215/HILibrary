@@ -1,4 +1,4 @@
-package com.example.asproj.fragment.detail
+package com.example.asproj.biz.detail
 import android.content.res.ColorStateList
 import android.view.Gravity
 import android.view.LayoutInflater

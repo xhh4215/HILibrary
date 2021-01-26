@@ -1,7 +1,6 @@
-package com.example.asproj.fragment.detail
+package com.example.asproj.biz.detail
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -87,7 +86,7 @@ class DetailActivity : HiBaseActivity() {
      */
     private fun bindData(detailModel: DetailModel) {
         recycler_view.visibility = View.VISIBLE
-//        emptyView!!.visibility = View.GONE
+        emptyView?.visibility = View.GONE
         val hiAdapter = recycler_view.adapter as HiAdapter
         val dataItems = mutableListOf<HiDataItem<*, *>>()
         dataItems.add(
@@ -105,7 +104,7 @@ class DetailActivity : HiBaseActivity() {
             ShopItem(detailModel)
         )
         dataItems.add(
-            GoodsAttrItem(detailModel)
+            GoodAttrItem(detailModel)
         )
         hiAdapter.clearItems()
         hiAdapter.addItems(dataItems, true)

@@ -1,4 +1,4 @@
-package com.example.asproj.fragment.detail
+package com.example.asproj.biz.detail
 
 import android.content.Context
 import android.text.SpannableString

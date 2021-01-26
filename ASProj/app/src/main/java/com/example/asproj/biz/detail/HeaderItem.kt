@@ -1,13 +1,11 @@
-package com.example.asproj.fragment.detail
+package com.example.asproj.biz.detail
 
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextUtils
 import android.text.style.AbsoluteSizeSpan
 import android.widget.ImageView
-import androidx.recyclerview.widget.RecyclerView
 import com.example.asproj.R
-import com.example.asproj.http.model.DetailModel
 import com.example.asproj.http.model.SliderImage
 import com.example.common.ui.view.loadUrl
 import com.example.hi_ui.ui.banner.core.HiBannerMo

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_eee"
-    tools:context=".fragment.detail.DetailActivity">
+    tools:context=".biz.detail.DetailActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

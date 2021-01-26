@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ASProj"
         android:usesCleartextTraffic="true">
-        <activity android:name=".fragment.detail.DetailActivity"></activity>
+        <activity android:name="com.example.asproj.biz.detail.DetailActivity"></activity>
         <activity android:name=".rote.DegradeGlobalActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

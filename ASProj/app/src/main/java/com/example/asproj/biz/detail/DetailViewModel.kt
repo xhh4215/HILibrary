@@ -1,4 +1,4 @@
-package com.example.asproj.fragment.detail
+package com.example.asproj.biz.detail
 
 import androidx.lifecycle.*
 import com.example.asproj.BuildConfig
