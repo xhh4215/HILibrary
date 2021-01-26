@@ -1,10 +1,13 @@
 package com.example.asproj.biz.detail
 
+import android.text.TextUtils
 import androidx.lifecycle.*
 import com.example.asproj.BuildConfig
 import com.example.asproj.http.api.ApiFactory
 import com.example.asproj.http.api.detailapi.DetailApi
+import com.example.asproj.http.api.detailapi.FactoryApi
 import com.example.asproj.http.model.DetailModel
+import com.example.asproj.http.model.Favorite
 import com.example.hi_library.restful.HiResponse
 import com.example.hi_library.restful.callback.HiCallBack
 import java.lang.Exception
@@ -69,4 +72,24 @@ class DetailViewModel(val goodId: String?) : ViewModel() {
         return pageData
     }
 
+    fun toggleFavorite(): LiveData<Boolean?> {
+        val toggleData = MutableLiveData<Boolean?>()
+        if (!TextUtils.isEmpty(goodId)) {
+            ApiFactory.create(FactoryApi::class.java).favorite(goodId!!)
+                .enqueue(object : HiCallBack<Favorite> {
+                    override fun onSuccess(response: HiResponse<Favorite>) {
+                        if (response.successfull() && response.data != null) {
+                            toggleData.postValue(response.data?.isFavorite)
+                        }
+                    }
+
+                    override fun onFailed(throwable: Throwable) {
+                        toggleData.postValue(null)
+
+                    }
+
+                })
+        }
+        return toggleData
+    }
 }

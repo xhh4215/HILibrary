@@ -80,4 +80,7 @@
     <string name="fetch_user_profile_fail">用户信息获取失败</string>
     <string name="shop_desc">商品数量:%s以拼:%s</string>
     <string name="item_similar_title">相似商品</string>
+    <string name="detail_favorite_success">收藏成功</string>
+    <string name="detail_favorite_cancel">取消收藏成功</string>
+    <string name="detail_order_action">立即购买</string>
 </resources>

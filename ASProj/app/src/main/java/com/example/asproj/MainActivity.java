@@ -54,12 +54,7 @@ public class MainActivity extends HiBaseActivity implements ActivityProvider {
     @Override
     protected void onResume() {
         super.onResume();
-        getLifecycle().addObserver(new LifecycleEventObserver() {
-            @Override
-            public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
-                Log.d("event", event.name());
-            }
-        });
+        getLifecycle().addObserver((LifecycleEventObserver) (source, event) -> Log.d("event", event.name()));
     }
 
     @Override

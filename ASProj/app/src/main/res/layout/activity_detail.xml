@@ -38,6 +38,11 @@
             android:paddingBottom="@dimen/dp_5"
             android:text="@string/if_back"
             android:textSize="@dimen/sp_18" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
 
         <com.example.common.ui.view.IconFontTextView
             android:id="@+id/action_share"
@@ -81,7 +86,7 @@
             android:background="@color/color_d43"
 
             android:gravity="center"
-            android:text="¥29\n收藏"
+            android:text="¥29\n立即购买"
             android:textColor="@color/color_white"
             android:textSize="@dimen/sp_14" />
     </LinearLayout>

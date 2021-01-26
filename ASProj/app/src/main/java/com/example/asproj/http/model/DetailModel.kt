@@ -39,4 +39,4 @@ data class Shop(
     val name: String
 )
 
-
+data class Favorite(val goodsId: String, var isFavorite: Boolean)
