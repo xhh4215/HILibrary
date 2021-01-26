@@ -79,4 +79,5 @@
     <string name="title_category">分类</string>
     <string name="fetch_user_profile_fail">用户信息获取失败</string>
     <string name="shop_desc">商品数量:%s以拼:%s</string>
+    <string name="item_similar_title">相似商品</string>
 </resources>

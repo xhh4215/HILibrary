@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.asproj.R
+import com.example.asproj.fragment.home.GoodsItem
 import com.example.asproj.http.model.DetailModel
 import com.example.asproj.http.model.GoodsModel
 import com.example.asproj.http.model.selectPrice
@@ -106,6 +107,15 @@ class DetailActivity : HiBaseActivity() {
         dataItems.add(
             GoodAttrItem(detailModel)
         )
+        detailModel.gallery?.forEach {
+            dataItems.add(GalleryItem(it))
+        }
+        detailModel.similarGoods?.let {
+            dataItems.add(SimilarTitleItem())
+            it.forEach {
+                dataItems.add(GoodsItem(it,false))
+            }
+        }
         hiAdapter.clearItems()
         hiAdapter.addItems(dataItems, true)
     }

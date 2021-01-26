@@ -1,0 +1,61 @@
+package com.example.asproj.biz.detail
+
+import android.graphics.Color
+import android.text.TextUtils
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.example.asproj.http.model.SliderImage
+import com.example.common.ui.view.loadUrl
+import com.example.hi_ui.ui.dataitem.HiDataItem
+import com.example.hi_ui.ui.dataitem.HiViewHolder
+
+class GalleryItem(val sliderImage: SliderImage) : HiDataItem<SliderImage, HiViewHolder>() {
+    private var parentWidth:Int = 0
+    override fun onBindData(holder: HiViewHolder, position: Int) {
+        val imageView = holder.itemView as ImageView
+        if (!TextUtils.isEmpty(sliderImage.url)) {
+            imageView.loadUrl(sliderImage.url) {
+                //占位图
+                //需要拿到图片加载后的回调
+                //根据图片的宽高等比计算imageView的宽高数值
+                val drawableWidth = it.intrinsicWidth
+                val drawableHeight = it.intrinsicHeight
+                val param = imageView.layoutParams ?: RecyclerView.LayoutParams(
+                    parentWidth,
+                    RecyclerView.LayoutParams.WRAP_CONTENT
+                )
+                param.width = parentWidth
+                param.height = (drawableHeight / (drawableWidth * 1.0f / parentWidth)).toInt()
+                imageView.layoutParams = param
+                ViewCompat.setBackground(imageView, it)
+            }
+
+        }
+    }
+
+    override fun getItemView(parent: ViewGroup): View? {
+        val imageView = ImageView(parent.context)
+        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+        imageView.setBackgroundColor(Color.WHITE)
+        return imageView
+    }
+
+    /****
+     * 提前给imageView设置一个宽高的数值  等于parent的宽度
+     */
+    override fun onViewAttachedToWindow(holder: HiViewHolder) {
+        parentWidth = (holder.itemView.parent as ViewGroup).measuredWidth
+        val parentParam = holder.itemView.layoutParams
+        if (parentParam.width != parentWidth) {
+            parentParam.width = parentWidth
+            parentParam.height = parentWidth
+            holder.itemView.layoutParams = parentParam
+        }
+
+
+    }
+
+}
