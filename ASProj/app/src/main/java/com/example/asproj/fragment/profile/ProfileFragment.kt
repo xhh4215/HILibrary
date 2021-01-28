@@ -49,6 +49,9 @@ class ProfileFragment : HiBaseFragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ll_notice.setOnClickListener {
+            ARouter.getInstance().build("/notice/list").navigation(context)
+        }
         //设置底部四个功能item的入口图标
 
         item_course.setText(R.string.if_notify)

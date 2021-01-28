@@ -1,6 +1,7 @@
 package com.example.asproj.http.api.accountapi
 
 import com.example.asproj.http.model.CourseNotice
+import com.example.asproj.http.model.Notice
 import com.example.asproj.http.model.UserProfile
 import com.example.hi_library.restful.annotation.Field
 import com.example.hi_library.restful.annotation.GET
@@ -44,5 +45,4 @@ interface AccountApi {
      */
     @GET("notice")
     fun notice(): HiCall<CourseNotice>
-
 }

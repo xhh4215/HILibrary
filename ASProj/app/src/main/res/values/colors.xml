@@ -23,6 +23,8 @@
     <color name="colorBackground">#F3F0F0</color>
     <color name="color_dd2">#DD2222</color>
     <color name="color_646">#646646</color>
+    <color name="color_gray1">#f1f2f3</color>
+
 
 
 </resources>
