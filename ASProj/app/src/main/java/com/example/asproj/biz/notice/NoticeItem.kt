@@ -12,9 +12,12 @@ import com.example.hi_library.utils.HiRes
 import com.example.hi_ui.ui.dataitem.HiDataItem
 import kotlinx.android.synthetic.main.layout_notice_item.view.*
 
+/***
+ * @author 栾桂明
+ * @date 2020年 1月 28日
+ * @desc  通知界面的列表的item的样式 和数据绑定的操作
+ */
 class NoticeItem(val itemData: Notice) : HiDataItem<Notice, RecyclerView.ViewHolder>() {
-
-
     override fun getItemLayoutRes(): Int {
         return R.layout.layout_notice_item
     }

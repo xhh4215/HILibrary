@@ -21,7 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ASProj"
         android:usesCleartextTraffic="true">
-        <activity android:name=".biz.notice.NoticeListActivity"></activity>
+        <activity android:name=".arch.kotlin.LoginActivity"></activity>
+        <activity android:name=".arch.java.CommonActivity" />
+        <activity android:name=".arch.MVPActivity" />
+        <activity android:name=".biz.notice.NoticeListActivity" />
         <activity android:name=".biz.detail.DetailActivity" />
         <activity android:name=".rote.DegradeGlobalActivity" />
         <activity android:name=".MainActivity">
