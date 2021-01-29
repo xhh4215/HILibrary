@@ -21,8 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ASProj"
         android:usesCleartextTraffic="true">
-        <activity android:name=".arch.kotlin.LoginActivity"></activity>
-        <activity android:name=".arch.java.CommonActivity" />
+        <activity android:name=".arch.java.mvvm.MvvmActivity"></activity>
+        <activity
+            android:name=".ui.login.MvvmLoginActivity"
+            android:label="@string/title_activity_mvvm_login" />
+        <activity android:name=".arch.kotlin.mvp.LoginActivity" />
+        <activity android:name=".arch.java.mvp.CommonActivity" />
         <activity android:name=".arch.MVPActivity" />
         <activity android:name=".biz.notice.NoticeListActivity" />
         <activity android:name=".biz.detail.DetailActivity" />

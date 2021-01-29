@@ -10,4 +10,7 @@ project(':hilibrary').projectDir="../hilibrary/hi-library" as File
 include 'hiui'
 project(':hiui').projectDir = "../hiui/hi-ui" as File
 
+include 'hiarch'
+project(':hiarch').projectDir = "../hiarch/hi-arch" as File
+
 

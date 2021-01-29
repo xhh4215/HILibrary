@@ -25,6 +25,6 @@ data class UserProfile(
     val browseCount: Int,
     val learnMinutes: Int,
     val userName: String,
-    val userIcon: String,
+    var userIcon: String,
     val bannerNoticeList: List<Notice>
 )

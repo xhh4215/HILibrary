@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/hidebugtool" />
+            <option value="$PROJECT_DIR$/../hiarch/hi-arch" />
             <option value="$PROJECT_DIR$/../hilibrary/hi-library" />
             <option value="$PROJECT_DIR$/../hiui/hi-ui" />
           </set>

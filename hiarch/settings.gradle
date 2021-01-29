@@ -1,0 +1,3 @@
+include ':hi-arch'
+include ':app'
+rootProject.name = "hiarch"
