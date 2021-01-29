@@ -4,31 +4,30 @@ import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.Gravity
+import android.view.LayoutInflater.from
 import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.example.asproj.BR
 import com.example.asproj.R
 import com.example.asproj.http.model.GoodsModel
-import com.example.asproj.http.model.selectPrice
 import com.example.asproj.rote.HiRoute
-import com.example.common.ui.view.loadUrl
 import com.example.hi_library.utils.HiDisplayUtil
 import com.example.hi_ui.ui.dataitem.HiDataItem
 import com.example.hi_ui.ui.dataitem.HiViewHolder
 import kotlinx.android.synthetic.main.layout_home_goods_list_item1.*
 
-open class GoodsItem(val goodsModel: GoodsModel, val hotTab: Boolean) :
-    HiDataItem<GoodsModel, HiViewHolder>(goodsModel) {
-    val MAX_TAG_SIZE = 3
-    override fun onBindData(holder: HiViewHolder, position: Int) {
+open class GoodsItem(private val goodsModel: GoodsModel, private val hotTab: Boolean) :
+    HiDataItem<GoodsModel, GoodsItem.GoodItemHolder>(goodsModel) {
+    private val MAX_TAG_SIZE = 3
+    override fun onBindData(holder: GoodsItem.GoodItemHolder, position: Int) {
         val context = holder.itemView.context
-
-        holder.item_image.loadUrl(goodsModel.sliderImage)
-        holder.item_title.text = goodsModel.goodsName
-        holder.item_price.text = selectPrice(goodsModel.groupPrice,goodsModel.marketPrice)
-        holder.item_sale_desc.text = goodsModel.completedNumText
+        holder.binding.setVariable(BR.goodModel, goodsModel)
         val itemLabelContainer = holder.item_label_container
         if (itemLabelContainer != null) {
             if (!TextUtils.isEmpty(goodsModel.tags)) {
@@ -95,8 +94,19 @@ open class GoodsItem(val goodsModel: GoodsModel, val hotTab: Boolean) :
         return labelView
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup): GoodItemHolder? {
+        val inflate = from(parent.context)
+        var binding =
+            DataBindingUtil.inflate<ViewDataBinding>(inflate, getItemLayoutRes(), parent, false)
+        return GoodItemHolder(binding)
+    }
+
     override fun getSpanSize(): Int {
         return if (hotTab) super.getSpanSize() else 1
     }
 
+    class GoodItemHolder(var binding: ViewDataBinding) : HiViewHolder(binding.root) {
+
+
+    }
 }

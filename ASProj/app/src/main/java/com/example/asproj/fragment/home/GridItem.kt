@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asproj.R
+import com.example.asproj.databinding.LayoutHomeOperationGridItemBinding
 import com.example.asproj.http.model.Subcategory
 import com.example.asproj.rote.HiRoute
 import com.example.common.ui.view.loadUrl
@@ -43,33 +44,34 @@ class GridItem(val list: List<Subcategory>) :
 
 
     inner class GridAdapter(val context: Context, val list: List<Subcategory>) :
-        RecyclerView.Adapter<HiViewHolder>() {
+        RecyclerView.Adapter<GridViewHolder>() {
         private val inflate: LayoutInflater = LayoutInflater.from(context)
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HiViewHolder {
-            val itemView = inflate.inflate(R.layout.layout_home_operation_grid_item, parent, false)
-            return HiViewHolder(itemView)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridViewHolder {
+            val binding = LayoutHomeOperationGridItemBinding.inflate(inflate, parent, false)
+            return GridViewHolder(binding.root, binding)
         }
 
         override fun getItemCount(): Int {
             return list.size
         }
 
-        override fun onBindViewHolder(holder: HiViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: GridViewHolder, position: Int) {
             val subcategory = list[position]
-            holder.item_image.loadUrl(subcategory.subcategoryIcon)
-            holder.item_title.text = subcategory.subcategoryName
+            holder.binding.subCategory = subcategory
             holder.itemView.setOnClickListener {
                 // 是应该跳转到类目的商品列表页
                 val bundle = Bundle()
-                bundle.putString("categoryId",subcategory.categoryId)
-                bundle.putString("categoryTitle",subcategory.subcategoryName)
-                bundle.putString("subcategoryId",subcategory.subcategoryId)
-                HiRoute.startActivity(context,bundle, HiRoute.Destination.GOODS_LIST)
+                bundle.putString("categoryId", subcategory.categoryId)
+                bundle.putString("categoryTitle", subcategory.subcategoryName)
+                bundle.putString("subcategoryId", subcategory.subcategoryId)
+                HiRoute.startActivity(context, bundle, HiRoute.Destination.GOODS_LIST)
 
             }
         }
 
     }
 
+    inner class GridViewHolder(view: View, var binding: LayoutHomeOperationGridItemBinding) :
+        HiViewHolder(view)
 }

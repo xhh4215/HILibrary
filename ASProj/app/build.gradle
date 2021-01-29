@@ -36,8 +36,8 @@ android {
         //开启拆分包
         multiDexEnabled true
         //配置支持的动态库类型
-        ndk{
-            abiFilters 'armeabi-v7a','x86'
+        ndk {
+            abiFilters 'armeabi-v7a', 'x86'
         }
     }
 
@@ -47,7 +47,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
-        debug{
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
@@ -89,9 +89,9 @@ dependencies {
     implementation "com.google.code.gson:gson:$gson_version"
     implementation "com.google.android.material:material:$material_version"
     api "com.alibaba:arouter-api:$arouter_api_version"
-    implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation "androidx.annotation:annotation:1.1.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
     implementation project(path: ':common')
     implementation project(path: ':hilibrary')

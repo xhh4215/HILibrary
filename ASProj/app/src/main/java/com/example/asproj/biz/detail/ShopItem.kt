@@ -95,7 +95,7 @@ class ShopItem(val detailModel: DetailModel) : HiDataItem<DetailModel, HiViewHol
             return R.layout.layout_detail_item_shop_goods_item
         }
 
-        override fun onViewAttachedToWindow(holder: HiViewHolder) {
+        override fun onViewAttachedToWindow(holder: GoodItemHolder) {
             super.onViewAttachedToWindow(holder)
             val viewParent = holder.itemView.parent as ViewGroup
             val availableWidth =

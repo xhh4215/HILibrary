@@ -1,13 +1,15 @@
 package com.example.asproj.fragment.home
 
- import android.os.Bundle
+import android.os.Bundle
 import android.util.Log
 import android.util.SparseArray
 import android.view.View
- import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.asproj.R
@@ -32,27 +34,14 @@ class HomePageFragment : HiBaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         HiTabBottomLayout.clipBottomPadding(view_pager)
-        queryTabList()
+        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        homeViewModel.queryCategoryList().observe(viewLifecycleOwner, Observer {
+            it?.let {
+                updateUI(it)
+            }
+        })
     }
 
-    private fun queryTabList() {
-        ApiFactory.create(HomeApi::class.java).queryTabList()
-            .enqueue(object : HiCallBack<List<TabCategory>> {
-                override fun onFailed(throwable: Throwable) {
-
-                }
-
-                override fun onSuccess(response: HiResponse<List<TabCategory>>) {
-                    val data = response.data
-                    if (response.successfull() && data != null) {
-                        // 一次缓存数据  一次接口数据
-                        updateUI(data)
-
-                    }
-                }
-
-            })
-    }
 
     private val onTabSelectedListener =
         IHiTabLayout.OnTabSelectedListener<HiTabTopInfo<*>> { index, prevInfo, nextInfo ->

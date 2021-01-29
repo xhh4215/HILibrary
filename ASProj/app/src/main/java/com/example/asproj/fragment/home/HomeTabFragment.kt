@@ -2,7 +2,9 @@ package com.example.asproj.fragment.home
 
 import android.os.Bundle
 import android.text.TextUtils
- import android.view.View
+import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asproj.http.api.ApiFactory
@@ -20,6 +22,7 @@ import com.example.hi_ui.ui.dataitem.HiDataItem
 class HomeTabFragment : HiAbsListFragment() {
     private var categoryId: String? = null
     private val DEFAULT_HOT_TAB_CATEGORY_ID = "1"
+    private lateinit var homeViewModel: HomeViewModel
 
     companion object {
         fun newInstance(categoryId: String): HomeTabFragment {
@@ -30,13 +33,27 @@ class HomeTabFragment : HiAbsListFragment() {
             return fragment
         }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         categoryId = arguments?.getString("categoryId", DEFAULT_HOT_TAB_CATEGORY_ID)
         super.onViewCreated(view, savedInstanceState)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         queryTabCategoryList(CACHE_FIRST)
         enableLoadMore {
             queryTabCategoryList(NET_ONLY)
         }
+    }
+
+    private fun queryTabCategoryList(cacheFirst: Int) {
+        homeViewModel.queryTabCategoryList(categoryId, pageIndex, cacheFirst)
+            .observe(viewLifecycleOwner,
+                Observer {
+                    if (it != null) {
+                        updateUI(it)
+                    } else {
+                        finishRefresh(null)
+                    }
+                })
     }
 
     override fun createLayoutManager(): RecyclerView.LayoutManager {
@@ -54,26 +71,6 @@ class HomeTabFragment : HiAbsListFragment() {
     }
 
 
-    private fun queryTabCategoryList(cacheStrategy: Int) {
-        ApiFactory.create(HomeApi::class.java).queryTabCategoryList(cacheStrategy,categoryId!!, pageIndex, 10)
-            .enqueue(object : HiCallBack<HomeModel> {
-                override fun onSuccess(response: HiResponse<HomeModel>) {
-                    if (response.successfull() && response.data != null) {
-                        updateUI(response.data!!)
-                    } else {
-                        finishRefresh(null)
-                    }
-                }
-
-                override fun onFailed(throwable: Throwable) {
-                     //空数据页面
-                    finishRefresh(null)
-                }
-
-            })
-
-    }
-
     private fun updateUI(data: HomeModel) {
         if (!isAlive) return
         val dataItems = mutableListOf<HiDataItem<*, *>>()
@@ -83,8 +80,8 @@ class HomeTabFragment : HiAbsListFragment() {
         data?.subcategoryList?.let {
             dataItems.add(GridItem(data.subcategoryList))
         }
-         data.goodsList?.forEachIndexed { index, goodsModel ->
-             dataItems.add(
+        data.goodsList?.forEachIndexed { index, goodsModel ->
+            dataItems.add(
                 GoodsItem(
                     goodsModel,
                     TextUtils.equals(categoryId, DEFAULT_HOT_TAB_CATEGORY_ID)
